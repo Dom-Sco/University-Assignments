@@ -48,5 +48,24 @@ Now by the first isomorphism theorem we have:
 Now to get the result we require $\phi(G)\cong\mathbb{R}^*$ which occurs if the homorphism is surjective, i.e. $\forall a\in\mathbb{R}^*,\;\exists A\in \text{G } \text{s.t. } \phi(A)=\det(A)=a$. To show this we consider the matrix whose top left value is a, the rest of the diagonal is 1 and every other entry is 0. The determinant of this matrix is clearly a, and so we have a surjective homomorphism, hence the result.
 \end{proof}
 \section*{Q2}
+
 \section*{Q3}
+Let $U$ denote the set of roots of unity in $\mathbb{C}^*$. That is,
+$$U:=\{x\in\mathbb{C}\;|\;x^n=1,\;\;\text{for some }n\in\mathbb{Z}_{\geq0}\}$$
+We want to show that $\mathbb{Q}/\mathbb{Z}\cong U$.
+\begin{proof}
+We begin by considering the homomorphism $\phi:x\rightarrow e^{2\pi ix}, \;\;x\in\mathbb{Q}$. This is a homomorphism because if we consider $x,y\in\mathbb{Q}$ we get:
+\begin{align*}
+\phi(x+y)&=e^{2\pi i(x+y)}\\
+&=e^{2\pi ix}e^{2\pi iy}\\
+&=\phi(x)\cdot\phi(y)\\
+\end{align*}
+Now if we restrict x to the integers ($x\in\mathbb{Z}$) and apply Eulers identity and the fact that $\cos(2\pi x)=1$ and $\sin(2\pi x)=0$ $\forall x\in\mathbb{Z}$ we get:
+\begin{align*}
+e^{2\pi ix}&=\cos(2\pi x)+i\sin(2\pi x)\\
+&=1+i\cdot0\\
+&=1\\
+\end{align*}
+As 1 is the multiplicative identity in $\mathbb{C}^*$ we have that $\text{Ker }\phi=\mathbb{Z}$. Now by the first isomorphism theorem we have $\mathbb{Q}/\mathbb{Z}\cong \phi(\mathbb{Q})$. To get the result we must show that the homomorphism is surjective as that implies $\phi(\mathbb{Q})\cong U$. This means that $\forall z\in U,\;\;\exists a\in\mathbb{Q}$ s.t. $\phi\left(a\right)=z$. We have that $\phi(a)=e^{2\pi i a}=\cos(2\pi a)+i\sin(2\pi a)$ which is exactly the roots of unity as for $a=n$ this is one. This means the homomorphism is surjective, and hence the result follows.
+\end{proof}
 \end{document}

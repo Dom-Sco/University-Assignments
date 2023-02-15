@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.11)  13 FEB 2023 21:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.11)  15 FEB 2023 22:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**math3301ass1.tex
-(./math3301ass1.tex
+**math3303ass1.tex
+(./math3303ass1.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -231,8 +231,8 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count198
 \l__pdf_internal_box=\box51
 )
-(./math3301ass1.aux)
-\openout1 = `math3301ass1.aux'.
+(./math3303ass1.aux)
+\openout1 = `math3303ass1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
@@ -294,7 +294,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./math3301ass1.aux) )
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./math3303ass1.aux) )
  
 Here is how much of TeX's memory you used:
  3414 strings out of 481239
@@ -303,7 +303,7 @@ Here is how much of TeX's memory you used:
  18626 multiletter control sequences out of 15000+600000
  540921 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,14n,31p,454b,202s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,14n,31p,619b,202s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive
@@ -316,7 +316,7 @@ onts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sbm10.pfb>
-Output written on math3301ass1.pdf (2 pages, 109887 bytes).
+Output written on math3303ass1.pdf (2 pages, 117599 bytes).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
