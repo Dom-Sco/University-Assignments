@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+
+\title{Math3303 Assignment 1}
+\author{Dominic Scocchera}
+\date{Febuary 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+Let $\text{G} = \text{GL}_n(\mathbb{R})$ be the group of $n \times n$ invertible matrices and $\text{N} = \text{SL}_n(\mathbb{R})$ the subgroup of G consisting of those matrices which have determinant one. First we want to prove that N$\unlhd$G.
+\begin{proof}
+By definition we have that, N$\unlhd$G$\iff\forall g\in$G and $n\in$N, $gng^{-1}\in$N. This means we require det($gng^{-1}$)=1 $\forall$ g$\in$G and $n\in$N, as N is the group of invertible matrices whose determinant is 1. By calculation and properties of determinant ($\det(AB)=\det(A)\det(B)$, $\det(A^{-1})=\frac{1}{\det(A)}$, $\forall n\in\text{N},\;\;\det(n)=1$) we get:
+\begin{align*}
+    \det(gng^{-1})&=\det(g)\det(n)\det(g^{-1})\\
+    &=\frac{\det(g)}{\det(g)}\det(n)\\
+    &=1\\
+\end{align*}
+\end{proof}
+\noindent Now we want to prove $\text{G}/\text{N}\cong\mathbb{R}^*$.
+\begin{proof}
+First we define the homomorphism $\phi:\text{GL}_n(\mathbb{R})\rightarrow\mathbb{R}^*$. This is a homomorphism because $\forall A,B\in\text{GL}_n(\mathbb{R})$, $\phi(A\cdot B)=\det(A\cdot B)=\det(A)\cdot\det(B)\in\mathbb{R}^*$. As the identity element of $\mathbb{R}^*$ is 1 we have that:
+$$\text{Ker}\;\phi=\{A\in\text{GL}_n(\mathbb{R}):\det(A)=1\}=\text{SL}_n(\mathbb{R})$$
+Now by the first isomorphism theorem we have:
+\begin{align*}
+\text{GL}_n(\mathbb{R})/\text{Ker}\;\phi&=\text{GL}_n(\mathbb{R})/\text{SL}_n(\mathbb{R})\\
+&=G/N\\
+&\cong\phi(G)\\
+\end{align*}
+Now to get the result we require $\phi(G)\cong\mathbb{R}^*$ which occurs if the homorphism is surjective, i.e. $\forall a\in\mathbb{R}^*,\;\exists A\in \text{G } \text{s.t. } \phi(A)=\det(A)=a$. To show this we consider the matrix whose top left value is a, the rest of the diagonal is 1 and every other entry is 0. The determinant of this matrix is clearly a, and so we have a surjective homomorphism, hence the result.
+\end{proof}
+\section*{Q2}
+\section*{Q3}
+\end{document}
