@@ -96,4 +96,70 @@ e^{2\pi ix}&=\cos(2\pi x)+i\sin(2\pi x)\\
 \end{align*}
 As 1 is the multiplicative identity in $\mathbb{C}^*$ we have that $\text{Ker }\phi=\mathbb{Z}$. Now by the first isomorphism theorem we have $\mathbb{Q}/\mathbb{Z}\cong \phi(\mathbb{Q})$. To get the result we must show that the homomorphism is surjective as that implies $\phi(\mathbb{Q})\cong U$. This means that $\forall z\in U,\;\;\exists a\in\mathbb{Q}$ s.t. $\phi\left(a\right)=z$. We have that $\phi(a)=e^{2\pi i a}=\cos(2\pi a)+i\sin(2\pi a)$ which is exactly the roots of unity as for $a=n$ this is one. This means the homomorphism is surjective, and hence the result follows.
 \end{proof}
+\section*{Q4}
+Let $G$ be the subgroup of $\text{GL}_3(\mathbb{R})$ consisting of matrices of the form:
+$\begin{pmatrix}
+1 & a & c\\
+0 & 1 & b\\
+0 & 0 & 1\\
+\end{pmatrix}$
+Determine the centre $Z(G)$ and prove that $G/Z(G)\cong\mathbb{R}^2$.
+\begin{proof}
+Consider $A,B\in G$, where $ A = \begin{pmatrix}
+1 & a & c\\
+0 & 1 & b\\
+0 & 0 & 1\\
+\end{pmatrix}$ and $ B = \begin{pmatrix}
+1 & d & f\\
+0 & 1 & e\\
+0 & 0 & 1\\
+\end{pmatrix}$. We define $Z(G)=\{A\in G|\forall B\in G, AB=BA\}$, i.e. we requrie:
+\begin{align*}
+AB-BA &= \begin{pmatrix}
+1 & a+d & ea+c+f\\
+0 & 1 & b+e\\
+0 & 0 & 1\\
+\end{pmatrix} - \begin{pmatrix}
+1 & a+d & bd+c+f\\
+0 & 1 & b+e\\
+0 & 0 & 1\\
+\end{pmatrix}\\
+&=\begin{pmatrix}
+0 & 0 & ea-bd\\
+0 & 0 & 0\\
+0 & 0 & 0\\
+\end{pmatrix}\\
+&=\bold{0}\\
+\end{align*}
+So we require $ea-bd=0$ and we claim that $e=d=0$. If $d\neq0$ then with $b\neq0$ and $a=0$ we have $AB-BA\neq0$. Similar argument for e. Hence:
+$$Z(G)=B=\begin{pmatrix}
+1 & 0 & f\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{pmatrix}, \;\;\; f\in\mathbb{R}$$
+Now that we have $Z(G)$ we need to show $G/Z(G)\cong\mathbb{R}^2$. First consider the homomorphism $\phi: A\rightarrow\mathbb{R}^2$, where for $g\in G$, $\phi(g)=\begin{pmatrix}
+a\\
+b\\
+\end{pmatrix}$. This is a homomorphism because if we consider $g,g'\in G$ we get (noting how the matrices multiply from above):
+\begin{align*}
+\phi(gg')&=\begin{pmatrix}
+g_1+g'_1\\
+g_2+g'_2\\
+\end{pmatrix}\\
+&=\begin{pmatrix}
+g_1\\
+g_2\\
+\end{pmatrix}+\begin{pmatrix}
+g'_1\\
+g'_2\\
+\end{pmatrix}\\
+&=\phi(g)+\phi(g')\\
+\end{align*}
+We also clearly have:
+$$\text{ker }\phi=\{(a,b):a=b=0\}=Z(G)$$
+And as $g_1,g_2\in\mathbb{R}$ we have $\phi(g)\in\mathbb{R}^2$ and hence:
+$$\text{Im }\phi=\mathbb{R}^2$$
+This is also clearly a bijective mapping and hence by the first isomorphism theorem we have:
+$$G/Z(G)\cong\mathbb{R}^2$$
+\end{proof}
 \end{document}
