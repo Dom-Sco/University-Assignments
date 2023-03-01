@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+
+\title{Stat3004 Assignment 1}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+We want to show $\text{Var}(X)=\mathbb{E}[\text{Var}(X|Y)]+\text{Var}(\mathbb{E}[X|Y])$.
+\begin{proof}
+\begin{align*}
+    \text{Var}(X)&=\mathbb{E}[X^2]-\mathbb{E}[X]^2\\
+    &=\mathbb{E}[\mathbb{E}[X^2|Y]]-\mathbb{E}[X^2]\\
+    &=\mathbb{E}[\text{Var}(X|Y)+\mathbb{E}[X|Y]^2]-\mathbb{E}[X^2]\\
+    &=\mathbb{E}[\text{Var}(X|Y)+\mathbb{E}[X|Y]^2-\mathbb{E}[\mathbb{E}[X|Y]]]^2\\
+    &=\mathbb{E}[\text{Var}(X|Y)]+(\mathbb{E}[\mathbb{E}[X|Y]^2]-\mathbb{E}[\mathbb{E}[X|Y]]^2)\\
+    &=\mathbb{E}[\text{Var}(X|Y)]+\text{Var}(\mathbb{E}[X|Y])
+\end{align*}
+\end{proof}
+\section*{Q2}
+\subsection*{a)}
+Let $X$ be a non-negative random variable with $p.d.f,\;\;f$. Show $\mathbb{E}X=\int_{0}^{\infty}\mathbb{P}(X\geq x)dx$.
+\begin{proof}
+\begin{align*}
+\mathbb{E}X&=\int_{0}^{\infty}x f(x)dx\\
+&=-\int_{0}^{\infty}x(-f(x))dx\\
+&=-x(1-F(x))\Big\rvert_0^\infty+\int_{0}^{\infty}1-F(x)dx\;\;\;(*\text{note, Integration by parts and }F(x)\text{ is the }c.d.f)\\
+&=\int_{0}^{\infty}1-F(x)dx\;\;\;(*\text{note }\lim_{x\rightarrow\infty}1-F(x)=0\;\;\;\text{and }-0(1-F(0))=0)\\
+&=\int_{0}^{\infty}(1-\mathbb{P}(X\leq x))dx\\
+&=\int_{0}^{\infty}\mathbb{P}(X\geq x)dx\\
+\end{align*}
+\end{proof}
+\subsection*{b)}
+Show $\mathbb{E}[x^\alpha]=\int_0^\infty\alpha x^{\alpha-1}\mathbb{P}(X\geq x)dx$, where $\alpha>0$.
+\begin{proof}
+\begin{align*}
+\mathbb{E}[Y]&=\int_0^\infty\mathbb{P}(Y\geq y)dy\;\;\; (*\text{note we have this from a) and }Y=X^\alpha)\\
+&=\int_0^\infty \alpha x^{\alpha-1}\mathbb{P}(X^\alpha\geq x^\alpha)dx\;\;\;(*\text{note the change of variable, }y=x^\alpha\iff dy=\alpha x^{\alpha-1}dx)\\
+\end{align*}
+\end{proof}
+\section*{Q3}
+Suppose $X_1,...,X_n$ are independent random variables with $c.d.f$'s $F_1,...,F_n$ respectively. Express the $c.d.f$ of $M=\min(X_1,...,X_n)$ in terms of the $\{F_i\}$.
+\newline\newline
+\begin{align*}
+F_M(x)&=\mathbb{P}(M\leq x)\\
+&=\mathbb{P}(\min(X_1,...,X_n)\leq x)\\
+&=1-\mathbb{P}(X_1\geq x,...,X_n\geq x)\\
+&=1-\mathbb{P}(X_1\geq x)...\mathbb{P}(X_n\geq x)\\
+&=1-(1-F_1(x))...(1-F_n(x))\\
+&=1-\prod_{i=1}^n(1-F_{i}(x))\\
+\end{align*}
+\section*{Q4}
+\subsection*{a)}
+Determine $\mathcal{G}(z)=\mathbb{E}\left[z^X\right]$ for $z\in[0,1]$.
+\newline\newline
+\begin{align*}
+\mathcal{G}(z)&=\mathbb{E}\left[z^X\right]\\
+&=z^0\mathbb{P}(X=0)+z^1\mathbb{P}(X=1)+z^2\mathbb{P}(X=2)\\
+&=1-r-s+zr+z^2s\\
+&=1+r(z-1)+s(z^2-1)\\
+\end{align*}
+\subsection*{b)}
+We want to determine the mean and variance of $S_n$. We first determine the mean.
+\begin{align*}
+\mathbb{E}[S_n]&=\mathbb{E}\left[\sum_{i=1}^{S_{n-1}}X_{i,n-1}\right]\\
+&=\mathbb{E}\left[\mathbb{E}\left[\sum_{i=1}^{S_{n-1}}X_{i,n-1}|S_{n-1}\right]\right]\\
+&=\mathbb{E}\left[\sum_{i=1}^{S_{n-1}}\mathbb{E}\left[X_{i,n-1}|S_{n-1}\right]\right]\\
+&=\mathbb{E}\left[\sum_{i=1}^{S_{n-1}}\mathbb{E}\left[X_{i,n-1}\right]\right]\\
+&=\mathbb{E}[X_{i,n-1}]\mathbb{E}[S_{n-1}]\\
+&=(0\cdot(1-r-s)+1\cdot r+2\cdot s)\mathbb{E}[S_{n-1}]\\
+&=(r+2s)\mathbb{E}[S_{n-1}]\\
+\end{align*}
+We know $S_0=1\implies S_j=\mathbb{E}[X]^j$, so we have:
+\begin{align*}
+\mathbb{E}[S_n]&=(r+2s)(r+2s)^{n-1}\\
+&=(r+2s)^n\\
+\end{align*}
+Now we determine the variance. First noting that $\mu=\mathbb{E}[X]=r+2s$ and  $\sigma^2=\text{Var}(X)=\mathbb{E}[X^2]-\mu^2=0^2(1-r-s)+1^2r+2^2s-(r+2s)^2=r+4s-(r+2s)^2$.
+\begin{align*}
+\text{Var}(S_n)&=\mathbb{E}[\text{Var}()]\\
+%fill in from lecture content
+&=\begin{cases}\sigma^2\mu^{n-1}\left(\frac{1-\mu^n}{1-\mu}\right), & \text{if } \mu\neq1\\\sigma^2 n, & \text{if } \mu=1\end{cases}\\
+&=\begin{cases}(r+4s-(r+2s)^2)(r+2s)^{n-1}\left(\frac{1-(r+2s)^n}{1-(r+2s)}\right), & \text{if } r+2s\neq1\\(r+4s-(r+2s)^2) n, & \text{if } r+2s=1\end{cases}\\
+\end{align*}
+\subsection*{c)}
+\section*{Q5}
+First we we want to show $\mathcal{G}_n(z)=\mathcal{G}_{n-1}(\mathcal{G}(z))$.
+\begin{proof}
+First we will show that for $X=Y_1+...+Y_N$ where $Y_i$ is $i.i.d$, noting that X is a random sum of random variables so N is a random variable, that $\mathcal{G}_X(z)=\mathcal{G}_N(\mathcal{G}_{Y_1}(z))$.
+\begin{align*}
+\mathcal{G}_X(z)&=\mathbb{E}[z^X]\\
+&=\sum_{x=0}^{\infty}\mathbb{P}(X=x)z^x\\
+&=\sum_{n=0}^{\infty}\sum_{x=0}^{\infty}\mathbb{P}(X=x|N=n)\mathbb{P}(N=n)z^x\\
+&=\sum_{n=0}^{\infty}\mathbb{P}(N=n)\sum_{x=0}^{\infty}\mathbb{P}(X=x|N=n)z^x\\
+&=\sum_{n=0}^{\infty}\mathbb{P}(N=n)(\mathcal{G}_{Y_1}(z))^n\\
+&=\mathcal{G}_N(\mathcal{G}_{Y_1}(z))\\
+\end{align*}
+For a branching process we have $S_n=X_{1,n-1}+X_{2,n-1}+...+X_{N,n-1}$, where $X_{i,n-1}$ is the number of progeny produced by the $i_{\text{th}}$ member of the previous generation. It is clear to see that this is the same situation as what was shown above (random sum of random variables) and thus plugging in our variables to what was shown above we immediantly have our result:
+$$\mathcal{G}_n(z)=\mathcal{G}_{n-1}(\mathcal{G}(z))$$
+\end{proof}
+\noindent Now we we want to show $\mathcal{G}_n(z)=\mathcal{G}(\mathcal{G}_{n-1}(z))$.
+\begin{proof}
+We can easily see from the above result that we can continue it to get $\mathcal{G}_{n-1}(z)=\mathcal{G}_{n-2}(\mathcal{G}(z))$. Continuing this until we reach $\mathcal{G}_2(z)=\mathcal{G}_{1}(\mathcal{G}(z))$ we can easily see that $\mathcal{G}_n(z)=\mathcal{G}(...(\mathcal{G}(z)...)$ where this is n times and that all the terms in the middle of the brackets on the right hand side equal $\mathcal{G}_{n-1}(z)$, so we have our result:
+$$\mathcal{G}_n(z)=\mathcal{G}(\mathcal{G}_{n-1}(z))$$
+\end{proof}
+\end{document}
