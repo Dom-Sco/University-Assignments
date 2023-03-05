@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+
+\title{Stat3001 Assignment 1}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+We have $x_1,...,x_n\stackrel{iid}{\sim}N(\theta,\theta^2)$ so the likelihood function is:
+\begin{align*}
+L(\tilde{x};\theta)&=\prod_{i=1}^{n}f(\tilde{x};\theta)\\
+&=\prod_{i=1}^{n}(2\pi)^{-\frac{1}{2}}(\theta^2)^{-\frac{1}{2}}\exp\left(-\frac{1}{2}\frac{(x_i-\theta)^2}{\theta^2}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\theta)^2}{\theta^2}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{x_i^2-2x_i\theta+\theta^2}{\theta^2}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+\frac{1}{\theta}\sum_{i=1}^{n}x_i-\frac{n}{2}\right)\\
+\end{align*}
+Now taking the log likelihood we get:
+\begin{align*}
+\log L(\tilde{x};\theta)&=-\frac{n}{2}\left(\log 2\pi +\log\theta\right)-\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+\frac{1}{\theta}\sum_{i=1}^{n}x_i-\frac{n}{2}\\
+\end{align*}
+For the regular exponential family we require:
+$$L(\tilde{x};\theta)=\frac{b(\tilde{x})\exp(c(\theta)^TT(\tilde{x}))}{a(\theta)}$$
+And hence:
+$$\log L(\tilde{x};\theta)=\log b(\tilde{x})+c(\theta)^TT(\tilde{x})-\log a(\theta)$$
+Here we have:
+\begin{align*}
+a(\theta)&=\frac{n}{2}(\log2\pi+\log\theta+1)\\
+b(\tilde{x})&=1\\
+c(\theta)&=\left(\frac{1}{\theta},-\frac{1}{2\theta^2}\right)^T\\
+T(\tilde{x})&=\left(\sum_{i=1}^{n}x_i,\sum_{i=1}^{n}x_i^2\right)^T\\
+\end{align*}
+Here $T(\tilde{x})$ is the sufficient statistic for $\theta$ and from this we see that this distribution belongs to the regular exponential family.
+\section*{Q2}
+We have $x_1,...,x_n\stackrel{iid}{\sim}N(\theta,\theta)$ so the likelihood function is:
+\begin{align*}
+L(\tilde{x};\theta)&=\prod_{i=1}^{n}f(\tilde{x};\theta)\\
+&=\prod_{i=1}^{n}(2\pi)^{-\frac{1}{2}}(\theta)^{-\frac{1}{2}}\exp\left(-\frac{1}{2}\frac{(x_i-\theta)^2}{\theta}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-\frac{n}{2}}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\theta)^2}{\theta}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-\frac{n}{2}}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{x_i^2-2x_i\theta+\theta^2}{\theta}\right)\\
+&=(2\pi)^{-\frac{n}{2}}(\theta)^{-\frac{n}{2}}\exp\left(-\frac{1}{2\theta}\sum_{i=1}^{n}x_i^2+\sum_{i=1}^{n}x_i+n\theta\right)\\
+\end{align*}
+Now taking the log likelihood we get:
+\begin{align*}
+\log L(\tilde{x};\theta)&=-\frac{n}{2}\left(\log 2\pi +\log\theta\right)-\frac{1}{2\theta}\sum_{i=1}^{n}x_i^2+\sum_{i=1}^{n}x_i+n\theta\\
+\end{align*}
+For the regular exponential family we require:
+$$L(\tilde{x};\theta)=\frac{b(\tilde{x})\exp(c(\theta)^TT(\tilde{x}))}{a(\theta)}$$
+And hence:
+$$\log L(\tilde{x};\theta)=\log b(\tilde{x})+c(\theta)^TT(\tilde{x})-\log a(\theta)$$
+Here we have:
+\begin{align*}
+a(\theta)&=\frac{n}{2}(\log2\pi+\log\theta+2\theta)\\
+b(\tilde{x})&=\sum_{i=1}^{n}x_i\\
+c(\theta)&=-\frac{1}{2\theta}\\
+T(\tilde{x})&=\sum_{i=1}^{n}x_i^2\\
+\end{align*}
+Here $T(\tilde{x})$ is the sufficient statistic for $\theta$ and from this we see that this distribution belongs to the regular exponential family.
+\newline\newline
+Taking the derivative of the log likelihood equation and setting it to zero  we get:
+\begin{align*}
+\frac{d}{d\theta} \log L(\tilde{x};\theta)&=-\frac{n}{2\theta}+\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+n\\
+&=0\\
+\end{align*}
+Multiplying through by $2\theta^2$ we get:
+$$0=-n\theta+\sum_{i=1}^{n}x_i^2+n\theta^2$$
+This is quadratic in $\theta$ so we get:
+$$\hat{\theta}=\frac{-1+\sqrt{1+4\frac{1}{n}\sum_{i=1}^nx_i^2}}{2}$$
+As the likelihood function is from the regular exponential family we have:
+\begin{align*}
+\mathbb{E}\left[\sum_{i=1}^nx_i^2\right]&=\sum_{i=1}^n\mathbb{E}\left[x_i^2\right]\\
+&=\sum_{i=1}^n\text{Var}(X_i)+\mathbb{E}\left[x_i\right]^2\\
+&=\sum_{i=1}^n\theta+\theta^2\\
+&=n(\theta+\theta^2)\\
+&=\sum_{i=1}^nx_i^2\\
+\end{align*}
+Rearranging we get:
+$$0=n\theta^2+n\theta-\sum_{i=1}^nx_i^2$$
+Which is quadratic in $\theta$ so we get:
+\begin{align*}
+\hat{\theta}&=\frac{-1+\sqrt{n^2+2n\sum_{i=1}^nx_i^2}}{2n}\\
+&=\frac{-1+\sqrt{1+4\frac{1}{n}\sum_{i=1}^nx_i^2}}{2}\\
+\end{align*}
+As the likelihood is from the regular exponential family the suffecient statistic is also complete which guarentees are estimator of $\theta$ is unique. 
+\end{document}
