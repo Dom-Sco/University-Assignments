@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+
+\title{Math3303 Assignment 1}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+\subsection*{a)}
+We want to show that $G^\vee$ is a group.
+\begin{proof}
+Associativity:
+\newline
+$\forall\phi,\varphi,\theta\in G^\vee$ we have $(\phi(g)\varphi(g))\theta(g)=\phi(g)(\varphi(g)\theta(g))$ because $\phi(g),\varphi(g),\theta(g)\in \mathbb{C}^{\times}$, which is a set where associativity holds ($(a+bi)(c+di)=ac+adi+bci-bd=(c+di)(a+bi))$ so $\mathbb{C}^{\times}$ is abelian).
+\newline\newline
+Identity:
+\newline
+The identity is the identity homomorphism, $\phi(g)=1$. This is a homomorphism as $\forall g,h\in G$ we have:
+\begin{align*}
+1&=\phi(g\cdot h)\\
+&=\phi(g)\phi(h)\\
+&=1\cdot1\\
+&=1\\
+\end{align*}
+This is the identity as for some $\theta(g)\in\mathbb{C}^{\times}$ we have $\phi(g)\theta(g)=1\cdot(a+bi)=(a+bi)\cdot1=\theta(g)\phi(g)$.
+\newline\newline
+Inverses:
+For inverses we have $(\phi)^{-1}(g)=(\phi(g))^{-1}=\phi(g^{-1})$, which holds as $\mathbb{C}^{\times}$ is abelian.
+\newline\newline
+All group axioms hold so $G^\vee$ is a group.
+\end{proof}
+\subsection*{b)}
+We want to show that $(\mathbb{Z}/n)^\vee\cong\mathbb{Z}/n$.
+\begin{proof}
+First we will show that homomorphisms map to the roots of unity. We have that 1 is the generator of $\mathbb{Z}/n$ and 0 is it's identity. As a homomorphism preserves identity we have for a homomorphism $\phi$, $\phi(0)=1$ and we let $a=\phi(1)$. So we have:
+$$\phi(n)=\phi(n\cdot1)=a^n=1\implies a=\exp\left(\frac{2\pi ik}{n}\right),\;\;\;k\in\{0,...,n-1\}$$
+So there are n maps defined by:
+$$\phi_k(1)=\exp\left(\frac{2\pi ik}{n}\right),\;\;\;k\in\{0,...,n-1\}$$
+Noting this is what one maps to and by homomorphism $\phi(2)=\phi(1+1)=\phi(1)\phi(1)$ which can be extended until n-1 is reached (n maps back to identity). So the general homomorphisms for $g\in\mathbb{Z}/n$ are:
+$$\phi_k(g)=\exp\left(\frac{2\pi ik}{n}\right)^g,\;\;\;k\in\{0,...,n-1\}$$
+As there are n maps the order of $(\mathbb{Z}/n)^\vee$ is $(\mathbb{Z}/n)^\vee$ is n. $(\mathbb{Z}/n)^\vee$ is also abelian as $\phi_{k_1}(g_1)\phi_{k_2}(g_2)=\exp\left(\frac{2\pi ik_1}{n}\right)^{g_1}\exp\left(\frac{2\pi ik_2}{n}\right)^{g_2}=\exp\left(\frac{2\pi ik_2}{n}\right)^{g_2}\exp\left(\frac{2\pi ik_1}{n}\right)^{g_1}=\phi_{k_2}(g_2)\phi_{k_1}(g_1)$. We also have that $\mathbb{Z}/n$ is also of order n and is abelian, so by the finite theorem of abelian groups we have $(\mathbb{Z}/n)^\vee\cong\mathbb{Z}/n$.
+\end{proof}
+\subsection*{c)}
+We want to show $(G \times H)^\vee\cong G^\vee\times H^\vee$.
+\begin{proof}
+Suppose $g\in G$ and $h\in H$. We define the map $\theta:(G \times H)^\vee\rightarrow G^\vee\times H^\vee$, where $\theta(\phi((g,h)))=(\phi(g),\phi(h))$. This is a homomorphism because:
+\begin{align*}
+\theta(\phi_1((g_1,h_1)),\phi_2((g_2,h_2)))&=\theta(\phi_1((g_1,h_1))\phi_2((g_2,h_2)))\\
+&=(\phi_1(g_1),\phi_1(h_1))(\phi_1(g_2),\phi_1(h_2))\\
+&=\theta(\phi_1((g_1,h_1))\theta(\phi_2((g_2,h_2))\\
+\end{align*}
+We can also define the map $\alpha:G^\vee\times H^\vee\rightarrow(G \times H)^\vee$, where $\alpha((\phi(g),\phi(h))=\phi((g,h)))$ which is a homomorphism because:
+\begin{align*}
+\alpha((\phi_1(g_1),\phi_1(h_1)),(\phi_1(g_2),\phi_1(h_2)))&=\alpha((\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2)))\\
+&=(\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2))\\
+&=\phi_1((g_1,h_1))\phi_2((g_2,h_2))\\
+&=\alpha((\phi_1(g_1),\phi_1(h_1)))\alpha((\phi_2(g_2),\phi_2(h_2)))\\
+\end{align*}
+We also trivially see that trivially $\theta\circ\alpha=\bold{Id}$ and $\alpha\circ\theta=\bold{Id}$. Composed both ways they are the identity mapping, and hence $(G \times H)^\vee\cong G^\vee\times H^\vee$. We also note that this trivially extends to the direct product of n groups, and in this case the tuple is replaced with $(g_1,...,g_n)$.
+\end{proof}
+\subsection*{d)}
+We want to show that if $G$ is a finite abelian group, then $G^\vee\cong G$.
+\begin{proof}
+\begin{align*}
+G^\vee&\cong(\mathbb{Z}_{p_1^{\alpha_1}}\times...\times\mathbb{Z}_{p_n^{\alpha_n}})^\vee\;\;\;(*\text{fundamental theorem of finite abelian groups})\\
+&\cong(\mathbb{Z}_{p_1^{\alpha_1}})^\vee\times...\times(\mathbb{Z}_{p_n^{\alpha_n}})^\vee\;\;\;(*\text{From c)})\\
+&\cong\mathbb{Z}_{p_1^{\alpha_1}}\times...\times\mathbb{Z}_{p_n^{\alpha_n}}\;\;\;(*\text{From b)})\\
+&\cong G\;\;\;(*\text{fundamental theorem of finite abelian groups})
+\end{align*}
+\end{proof}
+\section*{Q2}
+\subsection*{a)}
+We want to show that the subgroup generated by $A$, $[G,G]$, is normal in $G$.
+\begin{proof}
+If $g\in G$ and $n\in [G,G]\leq G$, then we have that $gng^{-1}n^{-1}\in [G,G]$ and :
+$$(gng^{-1}n^{-1})n=gng^{-1}$$
+As $[G,G]$ is closed under products we have $gng^{-1}\in [G,G]$, hence by definition $[G,G]$ is normal in $G$.
+\end{proof}
+\subsection*{b)}
+We want to show that if $G$ is a normal subgroup of $M$ , then $[G, G]$ is also a normal subgroup of $M$.
+\begin{proof}
+Suppose $g,h\in G$ and $m\in M$. This means we have $mgm^{-1}\in G$ and $mhm^{-1}\in G$ because $G$ is normal in $M$. As these are elements of $G$ we have $mgm^{-1}mhm^{-1}(mgm^{-1})^{-1}(mhm^{-1})^{-1}\in [G,G]$. This gives:
+\begin{align*}
+mgm^{-1}mhm^{-1}(mgm^{-1})^{-1}(mhm^{-1})^{-1}&=mghm^{-1}mg^{-1}m^{-1}mh^{-1}m^{-1}\\
+&=mghg^{-1}h^{-1}m^{-1}\\
+&=mam^{-1}\\
+\end{align*}
+Here $a=ghg^{-1}h^{-1}\in[G,G]$. So $a$ is a general element of $[G,G]$ and $m$ a general element of $M$, so by definition of normality we have that $[G,G]$ is normal in $M$.  
+\end{proof}
+\end{document}
