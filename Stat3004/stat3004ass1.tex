@@ -95,14 +95,36 @@ We know $S_0=1\implies S_j=\mathbb{E}[X]^j$, so we have:
 \mathbb{E}[S_n]&=(r+2s)(r+2s)^{n-1}\\
 &=(r+2s)^n\\
 \end{align*}
-Now we determine the variance. First noting that $\mu=\mathbb{E}[X]=r+2s$ and  $\sigma^2=\text{Var}(X)=\mathbb{E}[X^2]-\mu^2=0^2(1-r-s)+1^2r+2^2s-(r+2s)^2=r+4s-(r+2s)^2$.
+Now we determine the variance. First noting that $\mu=\mathbb{E}[X]=r+2s$ and  $\sigma^2=\text{Var}(X)=\mathbb{E}[X^2]-\mu^2=0^2(1-r-s)+1^2r+2^2s-(r+2s)^2=r+4s-(r+2s)^2$. And from lectures we have:
 \begin{align*}
-\text{Var}(S_n)&=\mathbb{E}[\text{Var}()]\\
-%fill in from lecture content
-&=\begin{cases}\sigma^2\mu^{n-1}\left(\frac{1-\mu^n}{1-\mu}\right), & \text{if } \mu\neq1\\\sigma^2 n, & \text{if } \mu=1\end{cases}\\
+\text{Var}(S_n)&=\begin{cases}\sigma^2\mu^{n-1}\left(\frac{1-\mu^n}{1-\mu}\right), & \text{if } \mu\neq1\\\sigma^2 n, & \text{if } \mu=1\end{cases}\\
 &=\begin{cases}(r+4s-(r+2s)^2)(r+2s)^{n-1}\left(\frac{1-(r+2s)^n}{1-(r+2s)}\right), & \text{if } r+2s\neq1\\(r+4s-(r+2s)^2) n, & \text{if } r+2s=1\end{cases}\\
 \end{align*}
 \subsection*{c)}
+We know from lectures that the extinction probability is given by:
+$$\eta=\mathcal{G}(\eta)$$
+So we have:
+\begin{align*}
+\eta&=\mathcal{G}(\eta)\\
+&=(1-r-s)+r\eta+s\eta^2\\
+\end{align*}
+Rearranging we get:
+$$0=(1-r-s)+(r-1)\eta+s\eta^2$$
+Solving for $\eta$ we get:
+$$\eta=\begin{cases}
+        \frac{-(r-1)-\sqrt{(r-1)^2-4s(1-r-s)}}{2s} & \text{if } r+2s>1\\
+        1 & \text{if } r+2s\leq1\\
+        0 & \text{if } r+s=1
+    \end{cases}$$
+The 0 case is trivial as we have that $\mathbb{P}(X=0)=1-r-s=1-(r+s)=1-1=0$, so there all individuals are guarenteed to reproduce and hence extinction is impossible. The 1 case follows from lectures, we have that $\mu=r+2s\leq1$ and from above we know the variance is non-zero in this case. The last case follows from the solution to the above equation. We also only use the negative sign case as the positive sign case is $\geq1$ which violates the requirement derived in lectures $(<1)$.
+\begin{align*}
+\frac{-(r-1)+\sqrt{(r-1)^2-4s(1-r-s)}}{2s}&\geq1\\
+\sqrt{(r-1)^2-4s(1-r-s)}&\geq2s+(r-1)\\
+(r-1)^2-4s(1-r-s)&\geq(2s+(r-1))^2\\
+r^2-2r+1-4s+4sr+4s^2&\geq4s^2+4sr-4s+r^2-2r+1\\
+0&\geq0\\
+\end{align*}
+Which always holds.  
 \section*{Q5}
 First we we want to show $\mathcal{G}_n(z)=\mathcal{G}_{n-1}(\mathcal{G}(z))$.
 \begin{proof}
@@ -120,7 +142,7 @@ $$\mathcal{G}_n(z)=\mathcal{G}_{n-1}(\mathcal{G}(z))$$
 \end{proof}
 \noindent Now we we want to show $\mathcal{G}_n(z)=\mathcal{G}(\mathcal{G}_{n-1}(z))$.
 \begin{proof}
-We can easily see from the above result that we can continue it to get $\mathcal{G}_{n-1}(z)=\mathcal{G}_{n-2}(\mathcal{G}(z))$. Continuing this until we reach $\mathcal{G}_2(z)=\mathcal{G}_{1}(\mathcal{G}(z))$ we can easily see that $\mathcal{G}_n(z)=\mathcal{G}(...(\mathcal{G}(z)...)$ where this is n times and that all the terms in the middle of the brackets on the right hand side equal $\mathcal{G}_{n-1}(z)$, so we have our result:
+We can easily see from the above result that we can continue it to get $\mathcal{G}_{n-1}(z)=\mathcal{G}_{n-2}(\mathcal{G}(z))$. Continuing this until we reach $\mathcal{G}_2(z)=\mathcal{G}_{1}(\mathcal{G}(z))$. This holds as we have a random sum of random variables in each of these cases so this relation will hold regardless of the generation. We can see that $\mathcal{G}_n(z)=\mathcal{G}(...(\mathcal{G}(z)...)$ where this is n times. This is due to the recursive relation where for example $\mathcal{G}_3(z)=\mathcal{G}_{2}(\mathcal{G}(z))=\mathcal{G}_{1}(\mathcal{G}(\mathcal{G}(z)))$, we note here that $\mathcal{G}_1(z)=\mathcal{G}(z)$. From this we see that all the terms in the middle of the brackets on the right hand side equal $\mathcal{G}_{n-1}(z)$, so we have our result:
 $$\mathcal{G}_n(z)=\mathcal{G}(\mathcal{G}_{n-1}(z))$$
 \end{proof}
 \end{document}
