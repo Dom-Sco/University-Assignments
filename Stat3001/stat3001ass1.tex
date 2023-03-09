@@ -33,23 +33,19 @@ L(\tilde{x};\theta)&=\prod_{i=1}^{n}f(\tilde{x};\theta)\\
 &=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{(x_i-\theta)^2}{\theta^2}\right)\\
 &=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2}\sum_{i=1}^{n}\frac{x_i^2-2x_i\theta+\theta^2}{\theta^2}\right)\\
 &=(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+\frac{1}{\theta}\sum_{i=1}^{n}x_i-\frac{n}{2}\right)\\
+&=\exp\left(-\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+\frac{1}{\theta}\sum_{i=1}^{n}x_i\right)(2\pi)^{-\frac{n}{2}}(\theta)^{-n}\exp\left(-\frac{n}{2}\right)\\
+&=h_1(T(\tilde{x}))h_2(\tilde{x})\\
 \end{align*}
-Now taking the log likelihood we get:
+\noindent Hence we have by the Fisher-Neyman factorisation theorem:
+$$T(\tilde{x})=\left(\sum_{i=1}^{n}x_i,\sum_{i=1}^{n}x_i^2\right)^T$$
+Here $T(\tilde{x})$ is the sufficient statistic for $\theta$. 
+\newline\newline
+We also have:
 \begin{align*}
-\log L(\tilde{x};\theta)&=-\frac{n}{2}\left(\log 2\pi +\log\theta\right)-\frac{1}{2\theta^2}\sum_{i=1}^{n}x_i^2+\frac{1}{\theta}\sum_{i=1}^{n}x_i-\frac{n}{2}\\
+q&=\text{dim}(T(\tilde{x}))=2\\
+d&=\text{dim}(\theta)=1
 \end{align*}
-For the regular exponential family we require:
-$$L(\tilde{x};\theta)=\frac{b(\tilde{x})\exp(c(\theta)^TT(\tilde{x}))}{a(\theta)}$$
-And hence:
-$$\log L(\tilde{x};\theta)=\log b(\tilde{x})+c(\theta)^TT(\tilde{x})-\log a(\theta)$$
-Here we have:
-\begin{align*}
-a(\theta)&=\frac{n}{2}(\log2\pi+\log\theta+1)\\
-b(\tilde{x})&=1\\
-c(\theta)&=\left(\frac{1}{\theta},-\frac{1}{2\theta^2}\right)^T\\
-T(\tilde{x})&=\left(\sum_{i=1}^{n}x_i,\sum_{i=1}^{n}x_i^2\right)^T\\
-\end{align*}
-Here $T(\tilde{x})$ is the sufficient statistic for $\theta$ and from this we see that this distribution belongs to the regular exponential family.
+Noting that we can not factorise any further as it is a polynomial of different quadratic and linear terms so $q=2$. As $q\neq d$ it does not belong to the regular exponential family.
 \section*{Q2}
 We have $x_1,...,x_n\stackrel{iid}{\sim}N(\theta,\theta)$ so the likelihood function is:
 \begin{align*}
