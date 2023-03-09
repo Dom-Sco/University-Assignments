@@ -15,7 +15,7 @@
 \usepackage{float}
 \usepackage{array}
 
-\title{Math3303 Assignment 1}
+\title{Math3303 Assignment 2}
 \author{Dominic Scocchera}
 \date{March 2023}
 
@@ -65,18 +65,17 @@ We want to show $(G \times H)^\vee\cong G^\vee\times H^\vee$.
 \begin{proof}
 Suppose $g\in G$ and $h\in H$. We define the map $\theta:(G \times H)^\vee\rightarrow G^\vee\times H^\vee$, where $\theta(\phi((g,h)))=(\phi(g),\phi(h))$. This is a homomorphism because:
 \begin{align*}
-\theta(\phi_1((g_1,h_1)),\phi_2((g_2,h_2)))&=\theta(\phi_1((g_1,h_1))\phi_2((g_2,h_2)))\\
+\theta(\phi_1((g_1,h_1))\phi_2((g_2,h_2)))&=(\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2))\\
 &=(\phi_1(g_1),\phi_1(h_1))(\phi_1(g_2),\phi_1(h_2))\\
 &=\theta(\phi_1((g_1,h_1))\theta(\phi_2((g_2,h_2))\\
 \end{align*}
 We can also define the map $\alpha:G^\vee\times H^\vee\rightarrow(G \times H)^\vee$, where $\alpha((\phi(g),\phi(h))=\phi((g,h)))$ which is a homomorphism because:
 \begin{align*}
-\alpha((\phi_1(g_1),\phi_1(h_1)),(\phi_1(g_2),\phi_1(h_2)))&=\alpha((\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2)))\\
-&=(\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2))\\
+\alpha((\phi_1(g_1),\phi_1(h_1))(\phi_1(g_2),\phi_1(h_2)))&=\alpha((\phi_1(g_1)\phi_2(g_2),\phi_1(h_1)\phi_2(h_2)))\\
 &=\phi_1((g_1,h_1))\phi_2((g_2,h_2))\\
 &=\alpha((\phi_1(g_1),\phi_1(h_1)))\alpha((\phi_2(g_2),\phi_2(h_2)))\\
 \end{align*}
-We also trivially see that trivially $\theta\circ\alpha=\bold{Id}$ and $\alpha\circ\theta=\bold{Id}$. Composed both ways they are the identity mapping, and hence $(G \times H)^\vee\cong G^\vee\times H^\vee$. We also note that this trivially extends to the direct product of n groups, and in this case the tuple is replaced with $(g_1,...,g_n)$.
+It is now easy to see that $\theta\circ\alpha=\bold{Id}$ and $\alpha\circ\theta=\bold{Id}$. Composed both ways they are the identity mapping, and hence $(G \times H)^\vee\cong G^\vee\times H^\vee$. We also note that this trivially extends to the direct product of n groups, and in this case the tuple is replaced with $(g_1,...,g_n)$.
 \end{proof}
 \subsection*{d)}
 We want to show that if $G$ is a finite abelian group, then $G^\vee\cong G$.

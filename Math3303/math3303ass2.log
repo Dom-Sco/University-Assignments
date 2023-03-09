@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.11)  8 MAR 2023 20:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.28)  9 MAR 2023 14:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -327,13 +327,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--51
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 79.
+d on input line 78.
 
 [2] [3] (./math3303ass2.aux) ) 
 Here is how much of TeX's memory you used:
  3421 strings out of 481239
  46384 string characters out of 5920377
- 290881 words of memory out of 5000000
+ 289884 words of memory out of 5000000
  18630 multiletter control sequences out of 15000+600000
  542155 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -353,7 +353,7 @@ blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbo
 ls/msbm10.pfb>
-Output written on math3303ass2.pdf (3 pages, 142200 bytes).
+Output written on math3303ass2.pdf (3 pages, 142133 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream
