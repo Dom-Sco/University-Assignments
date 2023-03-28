@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd} 
+
+\title{Math3302 Assignment 1}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+\subsection*{a)}
+\subsection*{b)}
+\section*{Q2}
+\subsection*{a)}
+We will use algorithm 4.3.1 to find a basis for the linear code $C=\langle S\rangle$.
+\begin{align*}
+A&=\begin{pmatrix}
+2 &1&0&2&1&2\\
+1&1&1&1&1&0\\
+0&2&2&1&0&1\\
+\end{pmatrix}\\
+&\rightarrow \begin{pmatrix}
+2 &1&0&2&1&2\\
+1&0&0&2&1&1\\
+0&2&2&1&0&1\\
+\end{pmatrix},\;\;\;R_2=R_2+R_3\\
+&\rightarrow \begin{pmatrix}
+0 &1&0&1&2&0\\
+1&0&0&2&1&1\\
+0&2&2&1&0&1\\
+\end{pmatrix},\;\;\;R_1=R_1+R_2\\
+&\rightarrow \begin{pmatrix}
+0 &1&0&1&2&0\\
+1&0&0&2&1&1\\
+0&0&2&2&2&1\\
+\end{pmatrix},\;\;\;R_3=R_3+R_1\\
+&\rightarrow \begin{pmatrix}
+1&0&0&2&1&1\\
+0&1&0&1&2&0\\
+0&0&2&2&2&1\\
+\end{pmatrix},\;\;\;R_1\leftrightarrow R_2\\
+&\rightarrow \begin{pmatrix}
+1&0&0&2&1&1\\
+0&1&0&1&2&0\\
+0&0&1&1&1&2\\
+\end{pmatrix},\;\;\;R_3=R_3+R_3\\
+\end{align*}
+So a basis for C is thus $\{100211,010120,001112\}$ and hence the generating matrix is:
+$$G_C=\begin{pmatrix}
+1&0&0&2&1&1\\
+0&1&0&1&2&0\\
+0&0&1&1&1&2\\
+\end{pmatrix}$$
+\subsection*{b)}
+Now from a) we see that as $G_C=(I\;\;\;X)$ that C is a systematic code and hence:
+\begin{align*}
+H_C&=\begin{pmatrix}
+-X\\
+I\\
+\end{pmatrix}\\
+&=\begin{pmatrix}
+1&2&2\\
+2&1&0\\
+2&2&1\\
+1&0&0\\
+0&1&0\\
+0&0&1\\
+\end{pmatrix}
+\end{align*}
+\subsection*{c)}
+$H_C$ has no rows of zeros so $\delta>1$. $H_C$ has no pair of identical rows so $\delta>2$. Rows 1, 3 and 5 sum to zero so $\delta=3$.
+\subsection*{d)}
+$$\begin{pmatrix}1&2&1\\\end{pmatrix}G_c=\begin{pmatrix}1&2&1&2&0&0\\\end{pmatrix}$$
+\subsection*{e)}
+$$\begin{pmatrix}0&1&1&0&2&2\end{pmatrix}H_C=\begin{pmatrix}1&2&0\end{pmatrix}$$
+So the syndrome is $\begin{pmatrix}1&2&0\end{pmatrix}$. From $H_C$ we get that an SDA is as follows (note we are assuming there is at most a single error):
+\begin{center}
+\begin{tabular}{||c c||} 
+ \hline
+ Coset Leader &  Syndrome\\ [0.5ex] 
+ \hline\hline
+ 000000 & 000\\ 
+ \hline
+ 100000 & 122\\
+ \hline
+ 010000 & 210\\
+ \hline
+ 001000 & 221\\
+ \hline
+ 000100 & 100\\
+ \hline
+ 000010 & 010\\
+ \hline
+ 000001 & 001\\
+ \hline
+ 200000 & 211\\
+ \hline
+ 020000 & 120\\
+ \hline
+ 002000 & 112\\ 
+ \hline
+ 000200 & 200\\
+ \hline
+ 000020 & 020\\
+ \hline
+ 000002 & 002\\  [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+So the error is a 2 in position 2. So the most likely codeword is $011022-020000=021022$. Hence the codeword that was sent was $021$. 
+\section*{Q3}
+The Griesmer bound for a linear $(n,k,\delta)$ code is:
+$$n\geq\sum_{j=0}^{k-1}\left\lceil\frac{\delta}{2^j}\right\rceil$$
+We also have that a Reed-Muller code is a linear $(2^m,m+1,2^{m-1})$ code. Plugging these values into the Griesmer bound we get:
+\begin{align*}
+\sum_{j=0}^{k-1}\left\lceil\frac{\delta}{2^j}\right\rceil&=\sum_{j=0}^{(m+1)-1}\left\lceil\frac{2^{m-1}}{2^j}\right\rceil\\
+&=\sum_{j=0}^{m}\left\lceil2^{m-j-1}\right\rceil\\
+&=(2^{m-1}+2^{m-2}+...+2^{1}+2^{0})+\left(\left\lceil2^{-1}\right\rceil\right)\\
+&=(2^m-1)+(1)\\
+&=2^m\\
+&=n\\
+\end{align*}
+So the Reed-Muller code achieves the Griesmer bound with equality.
+\section*{Q4}
+\subsection*{a)}
+We first see that we are dealing with a binary linear (15,k,6) code. From the notes we have that the Hamming bound is:
+$$k\leq 15-\left\lceil\log_2\left(\sum_{j=0}^{\left\lfloor\frac{6-1}{2}\right\rfloor}{15\choose j}\right)\right\rceil=8$$
+For the Griesmer bound we have:
+$$15\geq \sum_{j=0}^{k-1}\left\lceil\frac{6}{2^j}\right\rceil$$
+We see that the RHS is an increasing function of k and the inequality only holds for $k\leq7$ (for k=7 the RHS equals 15). The Griesmer bound is better as it rules out the existance of codes of dimension 8 unlike the Hamming bound.
+\subsection*{b)}
+We know from class that a (23,12,7) code exists and that if an $(n,k,\delta)$ code exists then both an $(n-1,k-1,\delta)$ and a $(n-1,k,\delta-1)$ code exist. If we apply $(n-1,k-1,\delta)$ seven times and $(n-1,k,\delta-1)$ once to the (23,12,7) code we get a $(15,5,6)$ code. We also know that if a $(n,k,\delta)$ code exists then a $(n,j,\delta)$ code exists for $j\in\{1,...,k\}$. Hence there also exists a $(15,4,6)$, $(15,3,6)$, $(15,2,6)$ and a $(15,1,6)$ code. This is what we wanted to show.
+\section*{Q5}
+\section*{Q6}
+\section*{Q7}
+\subsection*{a)}
+\subsection*{b)}
+\end{document}

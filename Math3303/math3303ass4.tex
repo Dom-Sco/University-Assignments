@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd} 
+
+\title{Math3303 Assignment 4}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+Consider the action of $GL_2(\mathbb{Z})$ on $\mathbb{Z}^2$. Determine all the orbits and stabilisers of this action.
+\newline\newline
+We first note that for a $2\times2$ matrix $A=\begin{pmatrix}
+a & b\\
+c & d\\
+\end{pmatrix}$, it's inverse is $A^{-1}=\frac{1}{\text{det}(A)}\begin{pmatrix}
+d & -b\\
+-c & a\\
+\end{pmatrix}$ and as the inverses must also be in the group the entries remain integers if and only if $\text{det}(A)=ad-bc=\pm 1$. We also note that the orbit and stabiliser of the zero vector are:
+\begin{align*}
+\mathcal{O}(\mathbf{0})&=\{\mathbf{0}\}\\
+\text{Stab}(\mathbf{0})&=GL_2(\mathbb{Z})\\
+\end{align*}
+Now we want to show that the orbits in $\mathbb{Z}^2$ under the action of $GL_2(\mathbb{Z})$ are the vectors whose coordinates have a fixed greatest common divisor. Each orbit contains one vector of the form $\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}$ for $m\geq 0$, and the stabiliser of $\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}$ for $m > 0$ is $\left\{\begin{pmatrix}
+1 & x\\
+0 & y\\
+\end{pmatrix} |\;\;\; y = \pm1,x\in\mathbb{Z}\right\} \subset GL_2(\mathbb{Z})$.
+\begin{proof}
+We first note that $\text{gcd}(m,0)=m$, so the fixed gcd in each orbit is going to be $m$. We also note that the stabiliser is trivially true as 
+$\begin{pmatrix}
+1 & x\\
+0 & y\\
+\end{pmatrix}\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}=\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}$. We also have
+that $\begin{pmatrix}
+a & b\\
+c & d\\
+\end{pmatrix}\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}=\begin{pmatrix}
+ma\\
+mc\\
+\end{pmatrix}$. We have that a and c are relatively prime as $ad-bc=\pm 1$, which means that $\text{gcd}(ma,mc)=m$. We now see that each vector of the form $\begin{pmatrix}
+g\\
+h\\
+\end{pmatrix}$, where $\text{gcd}(g,h)=m$ is in the orbit of $\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}$. We can solve $gx+hy=m$ for some integers x and y so $\begin{pmatrix}
+\frac{g}{m} & -y\\
+\frac{h}{m} & x\\
+\end{pmatrix}$ is in $GL_2(\mathbb{Z})$ and from the solution to $gx+hy=m$, we get that the determinant is $\frac{g}{m}x+\frac{h}{m}y=1$. Also note that these fractions are in the integers as $\text{gcd}(g,h)=m$, so m is a divisor of both $g$ and $h$. Finally $\begin{pmatrix}
+\frac{g}{m} & -y\\
+\frac{h}{m} & x\\
+\end{pmatrix}\begin{pmatrix}
+m\\
+0\\
+\end{pmatrix}=\begin{pmatrix}
+g\\
+h\\
+\end{pmatrix}$. The stabiliser for all elements of the form $\begin{pmatrix}
+g\\
+h\\
+\end{pmatrix}$ is $\left\{\begin{pmatrix}
+1&0\\
+0&1\\
+\end{pmatrix}\right\}$.
+\end{proof}
+\section*{Q2}
+Let $G$ be a finite group acting transitively on a set $X$ satisfying $1 < |X| < \infty$. Show that there exists $g\in G$ which fixes no element of $X$.
+\begin{proof}
+As G is transitive (X has only one orbit) we get from the orbit stabiliser theorem, $|\text{Stab}(x)|=\frac{|G|}{|X|}$, $\forall x\in X$ (note that $|\text{Orb}(x)|=|X|$ by transistivity and the orbit stabiliser theorem states $|\text{Orb}(x)|=\frac{|G|}{|\text{stab}(x)|}$). Noting that every stabiliser contains the identity, we get:
+\begin{align*}
+\left|\bigcup_{x\in X}\text{Stab}(x)\right|&=\left|\bigcup_{x\in X}\{g\in G|gx=x\}\right|\\
+&\leq 1+|G|-|X|\\
+&=1+|X||\text{Stab}(x)|-|X|\\
+&=1+|X|\left(|\text{Stab}(x)|-1|\right)\\
+&=1+|X|\left(\frac{|G|}{|X|}-1\right)\\
+&<|G|\\
+\end{align*}
+Hence $\bigcup_{x\in X}\text{Stab}(x)\neq G$ so $\exists g\in G$ s.t. $gx\neq x,\;\;\;\forall x\in X$. We also note the last line holds as:
+\begin{align*}
+1+|X|\left(\frac{|G|}{|X|}-1\right)&<|G|\\
+\iff |G|-|X|&<|G|-1\\
+\end{align*}
+Which holds as $1<|X|$.
+\end{proof}
+\end{document}
