@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+
+\title{Stat3001 Assignment 2}
+\author{Dominic Scocchera}
+\date{March 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+
+\section*{Q2}
+\section*{Q3}
+We have the density:
+$$f(x, y, z)\propto {z\choose y}x^{\alpha+y-1}(1-x)^{\beta+z-y-1}\frac{\gamma^z}{z!}$$
+For $0<x<1$, $y=0,1,2,...,z$ , and $z=0,1,2,...$, and where $\alpha>0$, $\beta >0$ and $\gamma>0$ are constants.
+\newline\newline
+We want to derive a Gibbs sampler.
+\newline\newline
+\begin{align*}
+f_1(x|y,z)&=\frac{f(x,y,z)}{f(y,z)}
+\end{align*}
+\end{document}

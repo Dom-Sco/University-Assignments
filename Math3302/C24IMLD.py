@@ -17,16 +17,16 @@ def C24IMLD(w):
                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]])
 
     H = np.vstack((np.eye(12),B))
-    
     t = np.array([0,0,0,0,0,0,0,0,0,0,0,0])
     
-    syndrome = w@H%2
+    syndrome = (w@H)%2
     if sum(syndrome)<=3:
         e = np.hstack((syndrome,t))
         return (e+w)%2
     
     for i in range(B.shape[0]):
         if sum((syndrome+B[i])%2)<=2:
+            t = np.array([0,0,0,0,0,0,0,0,0,0,0,0])
             t[i] += 1
             e = np.hstack(((syndrome+B[i])%2,t))
             return (e+w)%2
@@ -38,8 +38,9 @@ def C24IMLD(w):
     
     for i in range(B.shape[0]):
         if sum((s2+B[i])%2)<=2:
+            t = np.array([0,0,0,0,0,0,0,0,0,0,0,0])
             t[i] += 1
-            e = np.hstack((t,(syndrome+B[i])%2))
+            e = np.hstack((t,(s2+B[i])%2))
             return (e+w)%2
     print("Request retransmission")
     
@@ -58,6 +59,8 @@ print(C23IMLD(w))
 
 w = np.array([1,0,1,1,0,1,0,0,0,0,1,0,1,1,1])
 
+            
+
 def cyclicBurst(w):
     gx = np.poly1d([1,0,0,1,1,1,1]) #the polynomial g(x)
     #example 7.6.3
@@ -72,37 +75,56 @@ def cyclicBurst(w):
                   [1, 1, 1, 0, 0, 1]])
     H = np.vstack((H,np.eye(6)))
     s = (w@H)%2
-    sp = np.poly1d(np.roll(s,int(len(s)/2)-1))
+    sp = np.poly1d(np.flip(s))
     
-    for i in range(6):
+    sol = []
+    
+    for i in range(9):
         t = np.zeros(i+2)
         t[0]+=1
         t = np.poly1d(t)
         a = np.polymul(sp,t)
         
-        #calculate the value of e mod gx
-        qx, rx = np.polynomial.polynomial.polydiv(gx, a)
-        qx = qx%2
+        #find positions of ones
+        pos = np.where(np.flip(np.array(a))==1)[0]
         
-        #calculate the burst length 
-        b = np.where(qx == 1)[0]
-        burst = max(b)-min(b)+1
-        if burst<=3:
-            si = [qx, i, 9] #si, i, dimension
+        polynomials = []
+        
+        poly = np.zeros(6)
+        
+        for j in range(len(pos)):
+            if pos[j]>=6:
+                polynomials.append(np.poly1d(np.flip(H[pos[j]-6])))
+            else:
+                poly[pos[j]]+=1
+        
+        polynomials.append(np.poly1d(np.flip(poly)))
+        
+        si = np.flip(np.array(sum(polynomials))%2)
+        
+        
+        b = max(np.where(si==1)[0])-min(np.where(si==1)[0])+1
+        
+        sol.append([si,b])
+        
+        if b<=3:
+            si = [si, i] #si, i, dimension
             break
     
-    kt = np.zeros(si[2])
+    kt = np.zeros(9-i)
     kt[0]+=1
     kt = np.poly1d(kt)
-    e = np.polymul(kt,si[0])
-    e = np.flip(e)
-    extend = np.zeros(len(w)-len(e))
-    e = np.hstack((extend,e))
+    e = np.polymul(kt,np.flip(si[0]))
+    extend = np.zeros(len(w)-len(e)-1)
+    e = np.hstack((e,extend))
     code = (w+e)%2
     syndrome = (code@H)%2
-    return code, syndrome
+    return code, sol
 
-print(cyclicBurst(w))
+a = cyclicBurst(w)
+
+print(a[0])
+print(a[1])
     
         
         
