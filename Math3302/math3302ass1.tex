@@ -17,8 +17,8 @@
 \usepackage{tikz-cd} 
 
 \title{Math3302 Assignment 1}
-\author{Dominic Scocchera}
-\date{March 2023}
+\author{Dominic Scocchera, s4642675, Tute 1}
+\date{April 2023}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -157,11 +157,11 @@ We see that the RHS is an increasing function of k and the inequality only holds
 \subsection*{b)}
 We know from class that a (23,12,7) code exists and that if an $(n,k,\delta)$ code exists then both an $(n-1,k-1,\delta)$ and a $(n-1,k,\delta-1)$ code exist. If we apply $(n-1,k-1,\delta)$ seven times and $(n-1,k,\delta-1)$ once to the (23,12,7) code we get a $(15,5,6)$ code. We also know that if a $(n,k,\delta)$ code exists then a $(n,j,\delta)$ code exists for $j\in\{1,...,k\}$. Hence there also exists a $(15,4,6)$, $(15,3,6)$, $(15,2,6)$ and a $(15,1,6)$ code. This is what we wanted to show.
 \section*{Q5}
-We want to show that for each integer $s\geq4$, there exists a linear binary code of length 2s+1, dimension 2s and distance 8.
+We want to show that for each integer $s\geq4$, there exists a linear binary code of length 2s+1, dimension 2s and distance 8. I couldn't figure out how to construct s=4 so here is a proof for $s\geq5$.
 \begin{proof}
 We begin by showing that the GV bound gives the existance for s=5.
 $${64-1\choose0}+...+{64-1\choose8-2}=75611761<4294967296=2^{64-32}$$
-We get existance of $s=4$ via application of the theorem that states if there exists a linear $(n, k, \delta)$-code, then there exists a linear $(n - 1, k - 1, \delta)$-code 16 times. We will now proceed by induction with our base case being the construction of $s=6$. We will make use of the theorem that states that if we let $C_1$ be a linear $(n, k_1, \delta_1)$-code and let $C_2$ be a linear $(n, k_2, \delta_2)$-code. Then there exists a linear $(2n, k_1 + k_2, d)$-code where $d = \min\{2\delta_1, \delta_2\}$. For our base case we let $C_1=C_2=(64,32,8)$, which is exactly the s=5 code and by the above theorem we get that there exists a $(2\cdot64,32+32,\min\{2\cdot8, 8\})=(128,64,8)$. Now we assume that it holds for $m$ and show that it also holds for $m+1$. By our inductive hypothesis we have that the $(2^{m+1},2^m,8)$ code exists and we want to show $(2^{m+2},2^{m+1},8)$ code exists. Taking $C_1=C_2=(2^{m+1},2^m,8)$, by the above theorem we get that $(2\cdot2^{m+1},2^{m}+2^{m},\min\{2\cdot8, 8\})=(2^{m+2},2^{m+1},8)$ code exists. Hence by the principle of mathematical induction we have shown that there always exists codes of the form $(2^{s+1},2^s,8)$ for all $s\geq4$. 
+We will now proceed by induction with our base case being the construction of $s=6$. We will make use of the theorem that states that if we let $C_1$ be a linear $(n, k_1, \delta_1)$-code and let $C_2$ be a linear $(n, k_2, \delta_2)$-code. Then there exists a linear $(2n, k_1 + k_2, d)$-code where $d = \min\{2\delta_1, \delta_2\}$. For our base case we let $C_1=C_2=(64,32,8)$, which is exactly the s=5 code and by the above theorem we get that there exists a $(2\cdot64,32+32,\min\{2\cdot8, 8\})=(128,64,8)$ which is the s=6 code. Now we assume that it holds for $m$ and show that it also holds for $m+1$. By our inductive hypothesis we have that the $(2^{m+1},2^m,8)$ code exists and we want to show $(2^{m+2},2^{m+1},8)$ code exists. Taking $C_1=C_2=(2^{m+1},2^m,8)$, by the above theorem we get that $(2\cdot2^{m+1},2^{m}+2^{m},\min\{2\cdot8, 8\})=(2^{m+2},2^{m+1},8)$ code exists. Hence by the principle of mathematical induction we have shown that there always exists codes of the form $(2^{s+1},2^s,8)$ for all $s\geq4$. 
 \end{proof}
 \section*{Q6}
 Our word is $w=10010101100111100010000$. We have $\lVert w \rVert=10$, we require $\lVert w*\rVert$ to be odd, so $w*=100101011001111000100001$. We now calculate the syndrome, $s=w*H=w*\begin{pmatrix}I_{12}\\B\\\end{pmatrix}=011010010001$. Now computing the sum of s and $b_j$ (each row of B) we get:
