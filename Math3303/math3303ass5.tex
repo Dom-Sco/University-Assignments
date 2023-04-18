@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd} 
+
+\title{Math3303 Assignment 5}
+\author{Dominic Scocchera}
+\date{April 2023}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+\maketitle
+\section*{Q1}
+We want to find all left, right and two-sided ideals of the ring of $n \times n$ complex matrices ($M_n(\mathbb{C})$). First we note that we have $1\leq i\leq n$ and $1\leq j\leq n$.
+\newline\newline
+Left Ideals:
+\newline
+Let $I_L$ be the set of left ideals, then we have:
+\begin{align*}
+1.\;\;&(I_L,+)\leq(M_n(\mathbb{C}),+)\\
+2.\;\;&\forall A\in M_n(\mathbb{C})\text{ and } B\in I_L,\;\; AB\in I_L\\
+\end{align*}
+So $I_L$ is the set of matrices whose $j_{th}$ column is all zeros. If we have $AB=C$ then the entry $c_{ij}=\sum_{k=1}^{n}a_{ik}b_{kj}=0$ as all $b_{kj}=0$, and so the $j_{th}$ column of $C$ is all zeros and hence it is in $I_L$. It is also satisfies condition 1 as adding two matrices whose $j_{th}$ columns are zero gives another matrix whose $j_{th}$ column is zeros, hence it is closed. Also we note that the identity is just the zero matrix.
+\newline\newline
+Right Ideals:
+\newline
+Let $I_R$ be the set of right ideals, then we have:
+\begin{align*}
+1.\;\;&(I_R,+)\leq(M_n(\mathbb{C}),+)\\
+2.\;\;&\forall A\in M_n(\mathbb{C})\text{ and } B\in I_L,\;\; BA\in I_R\\
+\end{align*}
+So $I_R$ is the set of matrices whose $i_{th}$ row is all zeros. If we have $BA=C$ then the entry $c_{ij}=\sum_{k=1}^{n}b_{ik}a_{kj}=0$ as all $b_{ik}=0$, and so the $i_{th}$ row of $C$ is all zeros and hence it is in $I_R$. It is also satisfies condition 1 as adding two matrices whose $i_{th}$ rows are zero gives another matrix whose $i_{th}$ row is zeros, hence it is closed. Also we note that the identity is just the zero matrix.
+\newline\newline
+Two Sided Ideals:
+\newline
+The two sided ideals are the set of matrices whose $i_{th}$ row and $j_{th}$ column are all zeros. It is clear to see this from above as such a matrix is a left sided ideal ($j_{th}$ column is all zeros) and also a right sided ideal ($i_{th}$ row is all zeros). As this set is both a left and right sided ideal it is a two sided ideal.
+\section*{Q2}
+We want to prove that $\mathbb{R}[x]/(x^2 + 1)$ is isomorphic to $\mathbb{C}$. First we will prove three lemmas:
+\begin{lemma}
+$x^2+1\in\mathbb{R}[x]$ is irreducible.
+\end{lemma}
+\begin{proof}
+Suppose $x^2+1$ is reducible, then:
+$$x^2+1=(ax+b)(cx+d)=acx^2+(ad+bc)x+bd$$
+Hence we have that $ac=1$, $bd=1$ and $ad+bc=0$. This yields:
+\begin{align*}
+ad&=-bc\\
+\implies (ac)d&=-bc^2\\
+\implies d&=-bc^2\\
+\implies (bd)&=-(bc)^2\\
+\implies 1&=-(bc)^2\\
+\end{align*}
+Which isn't possible as this requires that $bc=i$ but this can only occur if $b$ and/or $c$ are complex numbers but they are real so $x^2+1$ is irreducible.
+\end{proof}
+\begin{definition}[Prinicipal Ideal Domain (PID)]
+A principal ideal domain is an integral domain R in which every ideal has the form:
+$$\langle a \rangle = \{ar|r \in R\} = aR$$
+for some a in R.
+\end{definition}
+\begin{lemma}
+Let R be a PID, then every non-zero prime ideal is maximal.
+\end{lemma}
+\begin{proof}
+Let $P\subset R$ be a nonzero prime ideal. From the fact that $R$ is a PID we get that $P=\langle p\rangle$ for some $p\in R$. Now suppose there is an ideal $I= \langle x\rangle$ such that $\langle p\rangle\subseteq \langle x\rangle\subseteq R$. From this we have that $p\in \langle x\rangle$ so that $p=kx$ for some $k\in R$. As $\langle p\rangle$ is a prime ideal, we get that either $x\in\langle p\rangle$ or $k\in\langle p\rangle$. If $x\in \langle p\rangle$ , then $\langle x\rangle=\langle p\rangle$. If $k\in\langle p\rangle$, then $k=py\implies p=pyx\implies p(1-yx)=0\implies yx=1\implies x$ is a unit $\langle x\rangle=R$. Thus $P$ is maximal.
+\end{proof}
+\begin{lemma}
+$\mathbb{R}[x]$ is a principal ideal domain.
+\end{lemma}
+\begin{proof}
+Let $I$ be an ideal of $\mathbb{R}[x]$. There are two cases to consider. In the first we have $I=\{0\}$, which means that $I=0\mathbb{R}[x]$ and hence is a PID. In the second case $I\neq0$. This means that there exists a nonzero polynomial $f\in I$ with minimal degree. Let $g\in I$. By the division algorithm there exists polynomials $q,r\in\mathbb{R}[x]$ such that:
+$$g(x)=f(x)q(x)+r(x)$$
+where $r(x)=0$ or $0\leq \text{deg }r\leq\text{deg }f$. We rewrite the equation above as:
+$$r(x)=g(x)-f(x)q(x)$$
+Since $f\in I$ and $q\in\mathbb{R}[x]$ we have by definition of $I$ being an ideal that $fq\in I$. Since $g\in I$ we have that $(g-fq)\in I$. So $r\in I$. But by minimality of the degree of $f$ in $I$ we must have that $r(x)=0$. Therefore:
+$$g(x)=f(x)q(x)$$
+Since $g\in I$ was arbitrary we have that $I=f(x)\mathbb{R}[x]$. So $I$ is a principal ideal. Hence every ideal in $\mathbb{R}[x]$ is a principal ideal. So $\mathbb{R}[x]$ is a principal ideal domain.
+\end{proof}
+\begin{theorem}
+$\mathbb{R}[x]/(x^2 + 1)\cong\mathbb{C}$
+\end{theorem}
+\begin{proof}
+From lemma 3 $\mathbb{R}[x]$ is a PID and thus from lemma 2 every prime ideal is maximal. From lemma 1 $(x^2+1)$ is irreducible over $\mathbb{R}[x]$, and therefore $(x^2+1)$ is a maximal ideal, so $\mathbb{R}[x]/(x^2+1)$ is a field. Now define the homomorphism $\phi:\mathbb{R}[x]\rightarrow\mathbb{C}$, such that $\phi(f)=f(i)$, this is the polynomial $f$ evaluated at $i$). It is clear that $(x^2+1)\subseteq \text{ker }\phi$, and equality follows since $(x^2+1)$ is maximal. From the 1st isomorphism theorem for rings, we have $\mathbb{R}[x]/(x^2+1)\cong\mathbb{C}$.
+\end{proof}
+\noindent$\mathbb{R}[x]/(x^2 + x + 1)$ is isomorphic to
+$\mathbb{C}$ as $x^2+x+1$ is irreducible, so by the same argument as in the proof of theorem 1 except with the homomorphism being $\phi(f)=f\left(\frac{-1+\sqrt{3}i}{2}\right)$ we get that $\mathbb{R}[x]/(x^2 + x + 1)\cong\mathbb{C}$.
+\end{document}
