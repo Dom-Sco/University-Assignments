@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd}
+\usepackage{listings}
+
+\title{Stat3004 Assignment 3}
+\author{Dominic Scocchera}
+\date{April 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+%https://math.stackexchange.com/questions/2172959/joint-mass-function-of-a-poisson-process
+\section*{Q1}
+First we note that $N((a,b])\sim Poi(2\cdot(b-a))$.
+\subsection*{a)}
+\begin{align*}
+\mathbb{P}(N_{t_1}=n_1,N_{t_2}=n_2)&=\mathbb{P}(N_{2}=7,N_{12}=10)\\
+&=\mathbb{P}(N_2=7,N_{12-2}=10-7)\\
+&=\mathbb{P}(N_2=7)\mathbb{P}(N_{10}=3)\\
+&=e^{-2\cdot2}\frac{(2\cdot2)^7}{7!}e^{-2\cdot10}\frac{(2\cdot10)^{3}}{3!}\\
+&\approx1.636291121\times10^{-7}\\
+\end{align*}
+\subsection*{b)}
+\begin{align*}
+\mathbb{P}(N(1, t_1]=n_1, N(t_1-1,t_2]=n_2)&=\mathbb{P}(N(1,2]=7, N(1,12]=10)\\
+&=\mathbb{P}(N(1,2]=7, N(2,12]=3)\\
+&=\mathbb{P}(N(1,2]=7)\mathbb{P}(N(2,12]=3)\\
+&=\frac{e^{-2}(2)^7}{7!}\frac{e^{-20}(20)^3}{3!}\\
+&\approx 9.4458178806\times10^{-9}\\
+\end{align*}
+\subsection*{c)}
+\begin{align*}
+\mathbb{E}[N(1,t_1]\;|\;N(t_1-1,t_2]=n_2]&=\mathbb{E}[N(1,2]\;|\;N(1,12]=10]\\
+&=\sum_{t\geq0}t\cdot\mathbb{P}(N(1,2]=t|N(1,12]=10)\\
+&=\sum_{t=0}^{10}t\cdot\frac{\mathbb{P}(N(1,2]=t,N(1,12]=10)}{\mathbb{P}(N(1,12]=10)}\\
+&=\frac{1}{\mathbb{P}(N(1,12]=10)}\sum_{t=0}^{10}t\cdot\mathbb{P}(N(1,2]=t,N(2,12]=10-t)\\
+&=\frac{1}{\mathbb{P}(N(1,12]=10)}\sum_{t=0}^{10}t\cdot\mathbb{P}(N(1,2]=t)\mathbb{P}(N(2,12]=10-t)\\
+&=\frac{1}{\frac{e^{-22}(22)^{10}}{10!}}\sum_{t=0}^{10}t\cdot\frac{e^{-2}(2)^t}{t!}\frac{e^{-20}(20)^{10-t}}{(10-t)!}\\
+&=\frac{10}{11}\\
+\end{align*}
+\subsection*{d)}
+\begin{align*}
+\mathbb{E}[N(t_1-1,t_2]\;|\;N(1,t_1]=n_1]&=\mathbb{E}[N(1,12]\;|\;N(1,2]=7]\\
+&=\sum_{t\geq0}t\cdot\mathbb{P}(N(1,12]=t|N(1,2]=7)\\
+&=\sum_{t\geq0}t\cdot\mathbb{P}(N(1,12]=t|N(1,2]=7)\\
+&=\sum_{t\geq0}t\cdot\frac{\mathbb{P}(N(1,12]=t,N(1,2]=7)}{\mathbb{P}(N(1,2]=7)}\\
+&=\sum_{t\geq0}t\cdot\frac{\mathbb{P}(N(2,12]=t+7,N(1,2]=t)}{\mathbb{P}(N(1,2]=7)}\\
+\end{align*}
+\section*{Q2}
+\section*{Q3}
+\subsection*{a)}
+\subsection*{b)}
+\subsection*{c)}
+\section*{Q4}
+\subsection*{a)}
+\subsection*{b)}
+\subsection*{c)}
+\subsection*{d)}
+\end{document}
