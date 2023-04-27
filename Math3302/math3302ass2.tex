@@ -1,0 +1,352 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd}
+\usepackage{pythonhighlight}
+
+\title{Math3302 Assignment 2}
+\author{Dominic Scocchera, s4642675, Tute 1}
+\date{May 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+\subsection*{a)}
+We want to calculate the number of keys in an affine cipher which has a plaintext alphabet of size 36.
+$$\mathcal{K}=\{(a,b)\in\mathbb{Z}_{36}\times\mathbb{Z}_{36}:\text{gcd}(a,36)\}$$
+From this we know that $a\in\{1,3,5,7,9,11,15,17,19,21,23,25,27,29,31,33,35\}$. For each of these 17 values that a can take there are 36 possible values of b that a given value of a can pair with, hence:
+$$|\mathcal{K}|=17\cdot36=612$$
+\subsection*{b)}
+We know that $E_{k}(x)=ax+b\;\;\text{mod }36$. From the given plaintext and cipher text also know that:
+\begin{align*}
+25&=5a+b\;\;\text{mod }36\\
+29&=25a+b\;\;\text{mod }36\\
+32&=22a+b\;\;\text{mod }36\\
+\end{align*}
+Furthermore we get:
+\begin{align*}
+25-5a&=b\;\;\text{mod }36\\
+29-25a&=b\;\;\text{mod }36\\
+\end{align*}
+Hence:
+\begin{align*}
+25-5a&=29-25a\;\;\text{mod }36\\
+20a&=4\;\;\text{mod }36\\
+\end{align*}
+So a=11 or 29, and b=6 or 24. Only the pair (11,6) satisfies $32=22a+b\;\;\text{mod }36$, hence it is our key. To decrypt we use the function $D_{k}(y)=11^{-1}(y-6)\;\;\text{mod }36=23(y-6)\;\;\text{mod }36$. Applying this to the cipher text PTW8118UA, we get the plaintext is 5PMATTACK.
+\section*{Q2}
+\subsection*{a)}
+\begin{align*}
+K^{-1}&=\text{det}(K)^{-1}\begin{pmatrix}4 &-3\\ -3 & 6\\\end{pmatrix}\;\;\text{mod }26\\
+&=(6\cdot4-3\cdot3)^{-1}\begin{pmatrix}4 &-3\\ -3 & 6\\\end{pmatrix}\;\;\text{mod }26\\
+&=15^{-1}\begin{pmatrix}4 &-3\\ -3 & 6\\\end{pmatrix}\;\;\text{mod }26\\
+&=7\begin{pmatrix}4 &-3\\ -3 & 6\\\end{pmatrix}\;\;\text{mod }26\\
+&=\begin{pmatrix}2 &5\\ 5 & 16\\\end{pmatrix}\\
+\end{align*}
+\subsection*{b)}
+WFFUBT corresponds to the numbers $22,5,5,20,1,19$.
+\begin{align*}
+K^{-1}\begin{pmatrix}22\\5\\\end{pmatrix}&=\begin{pmatrix}17\\8\\\end{pmatrix}\\
+K^{-1}\begin{pmatrix}5\\20\\\end{pmatrix}&=\begin{pmatrix}6\\7\\\end{pmatrix}\\
+K^{-1}\begin{pmatrix}1\\19\\\end{pmatrix}&=\begin{pmatrix}19\\23\\\end{pmatrix}\\
+\end{align*}
+So the numbers for the plain text are $17,8,6,7,19,23$ and hence the plaintext is RIGHTX.
+\section*{Q3}
+\subsection*{a)}
+First we implement the index of coincidence:
+$$\varphi=\frac{\sum_{i=1}^{k}n_i(n_i-1)}{n(n-1)}$$
+Where $n_i$ are the counts of the letters in the cipher text and $n$ is the total length of the cipher text. And also Friedman's method 2 for working out the key length:
+$$m\approx\frac{n(\varphi_L-\varphi_0)}{(n-1)\varphi(T)-n\varphi_0+\varphi_L}$$
+Where $m$ is the length of the key, $\varphi_L$ is the index of coincidence for english (0.0667), $\varphi_0$ is the index of coincidence for random text $\left(\frac{1}{26}\right)$ and $\varphi(T)$ is the index of coincidence for the entire cipher text.
+\begin{python}
+import collections
+import numpy as np
+import string
+
+cipher = "The cipher text that was given (Too long to display)"
+def phi(c):
+    x = list(collections.Counter(c).items())
+    n = len(c)
+    phi = 0
+    for i in range(len(x)):
+        phi += x[i][1]*(x[i][1]-1)
+    phi = phi/(n*(n-1))
+    return phi
+
+def friedmanMethod2(c):
+    n = len(c)
+    phi_0 = 1/26
+    phi_L = 0.0667
+    phi_T = phi(c)
+    m = (n*(phi_L-phi_0))/((n-1)*phi_T-n*phi_0+phi_L)
+    return m
+
+print(friedmanMethod2(cipher))
+\end{python}
+From this we get $m\approx2.8622543040047796$.
+\subsection*{b)}
+For Friedman's method 1 we first split the cipher up into m arrays where each array contains the letters from the cipher that are in a position in the cipher congruent to $i\;\;\text{mod }m,\;\;\;i\in\{0,...,m-1\}$. We then calculate the index of coincidence for each array, for multiple values of m (In the code we calculate it for $1\leq m\leq10$). Then we calculate the error via $\sum_{i=1}^{m}|\varphi_i-\varphi_L|$ where $\varphi_i$ is the index of coincidence for a given m and $i_{th}$ array. Repeating this over multiple values of n we then take the value of m that has the lowest error to be the most likely key length.
+\begin{python}
+def array2string(arr):
+    strng = ""
+    for i in range(len(arr)):
+        strng += arr[i]
+    return strng
+
+def string2array(strng):
+    array = np.array([])
+    for i in range(len(strng)):
+        array = np.append(array,strng[i])
+    return array
+
+def cipherSplit(m,c):
+    split = []
+    cipher = []
+    for i in range(len(c)):
+        cipher.append(c[i])
+    cipher = np.array(cipher)
+    add = m - (len(cipher)%m)
+    for j in range(add):
+        cipher = np.append(cipher,np.array([""]))
+    cipher = cipher.reshape(int((len(cipher))/m),m)
+    for k in range(m):
+        split.append(array2string(cipher[:,k]))
+    return split
+
+def friedmanMethod1(c,maxm):
+    phimat = np.zeros([maxm,maxm])
+    loss = np.tril(0.0667*np.ones([maxm,maxm]))
+    for i in range(1,maxm+1):
+        splits = cipherSplit(i, c)
+        for j in range(len(splits)):
+            phimat[i-1,j] += phi(splits[j])
+    error = np.abs(phimat-loss)
+    error = np.sum(error,axis=1)
+    m = np.where(error == np.min(error))[0][0]+1
+    return m
+            
+print(friedmanMethod1(cipher,10))
+\end{python}
+From this we get that $m=5$.
+\subsection*{c)}
+Now we know the key length is probably 5 we can use frequency analysis to determine the key and then decrypt using $d_{k}((y_1,...,y_m))=(y_1-k_1,...,y_m-k_m)$. For the frequency analysis we assumed E is the most frequent and then took the first few most frequent letters in each of the $m$ arrays and calculated the shift. This narrowed down the set of possible keys to something that could be guess and checked by hand to find something reasonable.
+\begin{python}
+def letterFrequencies(x):
+    freq = {}
+ 
+    for i in x:
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    total = sum(freq.values(), 0.0)
+    freq = {k: v / total for k, v in freq.items()}
+    return freq
+    
+def shiftCalculation(c,m):
+    d = {chr(i+65):i for i in range(0,26)}
+    letters = ["E","T","A","O","I","N","S","H","R","D","L","U","C","M","W","F","G","Y","P","B","V","K","J","Z","X","Q"] #Letters from highest frequency in english language to lowest frequency
+    split = cipherSplit(m, c)
+    shifts = []
+    for i in range(len(split)):
+        listletters = []
+        freq = letterFrequencies(split[i])
+        sort = sorted(freq.values(),reverse=True)
+        for j in range(len(freq)):
+            listletters.append(d[list(freq.keys())[list(freq.values()).index(sort[j])]])
+        distance = []
+        for k in range(4):
+            ma = max(d[letters[0]],listletters[k])
+            mi = min(d[letters[0]],listletters[k])
+            distance.append((ma-mi))
+        shifts.append(distance)
+    return shifts
+
+shifts = shiftCalculation(cipher,5)
+
+#the key is [17,8,21,4,17]
+
+def decrypt(c,m):
+    d = {chr(i+65):i for i in range(0,26)}
+    split = cipherSplit(m, c)
+    shifts = [17,8,21,4,17]
+    arraylen = max(len(i) for i in split)
+    decrypt = []
+    for i in range(len(split)):
+        strng = ""
+        for j in range(len(split[i])):
+            s = (d[split[i][j]]-shifts[i])%26
+            strng += list(d.keys())[list(d.values()).index(s)]
+        decrypt.append(strng)
+    message = string2array(decrypt[0])
+    if len(message)!=arraylen:
+        while len(message)!=arraylen:
+            message = np.append(message,0)
+    for k in range(len(decrypt)-1):
+        arr = string2array(decrypt[k+1])
+        if len(arr)!=arraylen:
+            while len(arr)!=arraylen:
+                arr = np.append(arr,0)
+        message = np.vstack((message,string2array(decrypt[k+1])))
+    message = message.T
+    shape = message.shape[0]*message.shape[1]
+    message = message.reshape(shape)
+    return message
+
+
+message = decrypt(cipher,5)
+print(array2string(message))
+\end{python}
+From this we get that the two most likely shifts for the 5 arrays were $[[13, 17], [8, 3], [17, 21], [4, 0], [17, 21]]$. From guessing on this information we find that the key was RIVER and the plain text is MYFATHERSFAMILYNAMEBEINGPIRRIPANDMYCHRISTIANNAMEPHILIPMYINFANTTONGUE
+COULDMAKEOFBOTHNAMESNOTHINGLONGERORMOREEXPLICITTHANPIPSOICALLEDMYSELF
+PIPANDCAMETOBECALLEDPIPIGIVEPIRRIPASMYFATHERSFAMILYNAMEONTHEAUTHORITY
+OFHISTOMBSTONEANDMYSISTERMRSJOEGARGERYWHOMARRIEDTHEBLACKSMITHASINEVER
+SAWMYFATHERORMYMOTHERANDNEVERSAWANYLIKENESSOFEITHEROFTHEMFORTHEIRDAYS
+WERELONGBEFORETHEDAYSOFPHOTOGRAPHSMYFIRSTFANCIESREGARDINGWHATTHEYWERE
+LIKEWEREUNREASONABLYDERIVEDFROMTHEIRTOMBSTONESTHESHAPEOFTHELETTERSONMY
+FATHERSGAVEMEANODDIDEATHATHEWASASQUARESTOUTDARKMANWITHCURLYBLACKHAIR
+FROMTHECHARACTERANDTURNOFTHEINSCRIPTIONALSOGEORGIANAWIFEOFTHEABOVE
+IDREWACHILDISHCONCLUSIONTHATMYMOTHERWASFRECKLEDANDSICKLYTOFIVELITTLE
+STONELOZENGESEACHABOUTAFOOTANDAHALFLONGWHICHWEREARRANGEDINANEATROW
+BESIDETHEIRGRAVEANDWERESACREDTOTHEMEMORYOFFIVELITTLEBROTHERSOF
+MINEWHOGAVEUPTRYINGTOGETALIVINGEXCEEDINGLYEARLYINTHATUNIVERSAL
+STRUGGLEIAMINDEBTEDFORABELIEFIRELIGIOUSLYENTERTAINEDTHATTHEYHADALLBEEN
+BORNONTHEIRBACKSWITHTHEIRHANDSINTHEIRTROUSERSPOCKETSANDHADNEVERTAKENTHE
+MOUTINTHISSTATEOFEXISTENCEOURSWASTHEMARSHCOUNTRYDOWNBYTHERIVERWI
+THINASTHERIVERWOUNDTWENTYMILESOFTHESEAMYFIRSTMOSTVIVIDANDBROAD
+IMPRESSIONOFTHEIDENTITYOFTHINGSSEEMSTOMETOHAVEBEENGAINEDONAMEMORABLERAW
+AFTERNOONTOWARDSEVENINGATSUCHATIMEIFOUNDOUTFORCERTAINTHATTHISBLEAKPLACEOVER
+GROWNWITHNETTLESWASTHECHURCHYARDANDTHATPHILIPPIRRIPLATEOFTHISPARISHANDAL
+SOGEORGIANAWIFEOFTHEABOVEWEREDEADANDBURIEDANDTHATALEXANDERBARTHOLOMEWABRA
+HAMTOBIASANDROGERINFANTCHILDRENOFTHEAFORESAIDWEREALSODEADANDBURIEDAND
+THATTHEDARKFLATWILDERNESSBEYONDTHECHURCHYARDINTERSECTEDWITHDYKESANDMOUND
+SANDGATESWITHSCATTEREDCATTLEFEEDINGONITWASTHEMARSHESANDTHATTHELOW
+LEADENLINEBEYONDWASTHERIVERANDTHATTHEDISTANTSAVAGELAIRFROMWHICHTHEWIND
+WASRUSHINGWASTHESEAANDTHATTHESMALLBUNDLEOFSHIVERSGROWINGAFRAIDOFITALLANDBEGINNING
+TOCRYWASPIPHOLDYOURNOISECRIEDATERRIBLEVOICEASAMANSTARTEDUPFROMAMONGTHEGRAVE
+SATTHESIDEOFTHECHURCHPORCHKEEPSTILLYOULITTLEDEVILORILLCUTYOURTHROATAFEARFUL
+MANALLINCOARSEGREYWITHAGREATIRONONHISLEGAMANWITHNOHATANDWITH
+\section*{Q4}
+\subsection*{History}
+The ADFGX cipher was invented by Colonel Fritz Nebel, a communications officer of the Kaiser's army in world war one and went into usage on the 5th of March 1918. Georges Painvin broke the cipher in early June 1918.
+\subsection*{Cipher}
+The first part of the cipher is controlled by the polybius square, whose columns and rows are labelled ADFGVX. These letters were chosen because they are hard to mess up in morse code, as this was the communication technology used in world war one. To fill in the table we go from left to right, top to bottom. We start by filling it out with a key word, leaving out any repeat letters in the key word. Then we fill it in with the remaining unused letters of the alphabet in alphabetical order with the digits 1 to 9 being placed after A (1), B(2), C(3),... and the digit 0 being placed after J. As an example this would be the polybius square for the key word MATHEMATICS:
+\newline
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{1cm}| m{1cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} |} 
+ \hline
+& A & D & F & G & V & X \\
+ \hline
+A & M & A & 1 & T & H & 8 \\
+ \hline
+D & E & 5 & I & 9 & C & 3 \\
+ \hline
+F & S & B & 2 & D & 4 & F \\
+ \hline
+G & 6 & G & 7 & J & 0 & K \\
+ \hline
+V & L & N & O & P & Q & R \\
+ \hline
+X & U & V & W & X & Y & Z \\
+ \hline
+\end{tabular}
+\end{center}
+The plaintext is then encoded into the coordinates of the given letter or number in the table, for example SECRETCODE becomes FA,DA,DV,VX,DA,AG,DV,VF,FG,DA. Then given a key, for example FIVEX, we arrange the text as below:
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{1cm}| m{1cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} |} 
+ \hline
+F & I & V & E & X\\
+ \hline
+FA & DA & DV & VX & DA\\
+ \hline
+AG & DV & VF & FG & DA\\
+ \hline
+\end{tabular}
+\end{center}
+Now we rearrange the columns in alphabetical order:
+\begin{center}
+\begin{tabular}{ | m{1cm} | m{1cm}| m{1cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} |} 
+ \hline
+E & F & I & V & X\\
+ \hline
+VX & FA & DA & DV & DA\\
+ \hline
+FG & AG & DV & VF & DA\\
+ \hline
+\end{tabular}
+\end{center}
+Hence the cipher text becomes the columns in order, i.e. VX, FG, FA, AG, DA, DV, DV, VF, DA, DA. If the key for the table and key for permuting the text is known then decrypting it is the same as encryption but in reverse.
+\newline\newline
+Information on the cipher obtained from Codes and Codebreakers In World War I, Greg Goebel, 3 May 2010,
+\newline\href{https://web.archive.org/web/20100503103848/http://www.vectorsite.net/ttcode_04.html#m3}
+\section*{Q5}
+\subsection*{a)}
+\begin{align*}
+a&=b^{-1}\;\;\text{mod }\varphi(n)\\
+&=(3609)^{-1}\;\;\text{mod }\varphi(59\cdot71)\\
+&=(3609)^{-1}\;\;\text{mod }(59-1)(71-1)\\
+&=(3609)^{-1}\;\;\text{mod }4060\\
+\end{align*}
+From Eulers thereom ($a^{\varphi(n)}=1\;\;\text{mod }n$) we know $(3609)^{-1}\;\;\text{mod }4060=(3609)^{1344-1}\;\;\text{mod }4060=9$. Now $d_{k}(121)=(121)^{9}\;\;\text{mod }4189=2514$. Now we show the working for the exponentiation:
+\begin{align*}
+(3609)^{1344-1}\;\;\text{mod }4060&=(3609)^{1024}(3609)^{256}(3609)^{32}(3609)^{16}\\
+&\;\;\;\;\;(3609)^{8}(3609)^{4}(3609)^{2}(3609)^{1}\;\;\text{mod }4060\\
+(3609)^{1}&=3609\;\;\text{mod }4060\\
+(3609)^{2}&=401\;\;\text{mod }4060\\
+(3609)^{4}&=(401)^{2}\;\;\text{mod }4060=2461\;\;\text{mod }4060\\
+(3609)^{8}&=(2461)^{2}\;\;\text{mod }4060=3061\;\;\text{mod }4060\\
+(3609)^{16}&=(3061)^{2}\;\;\text{mod }4060=3301\;\;\text{mod }4060\\
+(3609)^{32}&=(3301)^{2}\;\;\text{mod }4060=3621\;\;\text{mod }4060\\
+(3609)^{64}&=(3621)^{2}\;\;\text{mod }4060=1901\;\;\text{mod }4060\\
+(3609)^{128}&=(1901)^{2}\;\;\text{mod }4060=401\;\;\text{mod }4060\\
+(3609)^{256}&=(401)^{2}\;\;\text{mod }4060=2461\;\;\text{mod }4060\\
+(3609)^{512}&=(2461)^{2}\;\;\text{mod }4060=3061\;\;\text{mod }4060\\
+(3609)^{1024}&=(3061)^{2}\;\;\text{mod }4060=3301\;\;\text{mod }4060\\
+(3609)^{1343}\;\;\text{mod }4060&=3609\cdot401\cdot2461^2\cdot3061\cdot3301^2\cdot3621\;\;\text{mod }4060\\
+&=3609\cdot401\cdot3061\cdot3061\cdot3621\cdot3621\;\;\text{mod }4060\\
+&=3609\cdot401\cdot3061^2\cdot3621^2\;\;\text{mod }4060\\
+&=3609\cdot401\cdot3301\cdot1901\;\;\text{mod }4060\\
+&=9\;\;\text{mod }4060\\
+\end{align*}
+\begin{align*}
+(121)^{9}\;\;\text{mod }4189&=(121)^{8}(121)^{1}\;\;\text{mod }4189\\
+(121)^{1}\;\;\text{mod }4189&=121\;\;\text{mod }4189\\
+(121)^{2}\;\;\text{mod }4189&=2074\;\;\text{mod }4189\\
+(121)^{4}\;\;\text{mod }4189&=(2074)^2\;\;\text{mod }4189=3562\;\;\text{mod }4189\\
+(121)^{8}\;\;\text{mod }4189&=(3562)^2\;\;\text{mod }4189=3552\;\;\text{mod }4189\\
+(121)^{9}\;\;\text{mod }4189&=3552\cdot121\;\;\text{mod }4189\\
+&=2514\;\;\text{mod }4189\\
+\end{align*}
+\subsection*{b)}
+$b=\frac{\varphi(n)}{2}+1$ is not a good choice as it is it's own inverse working mod $\varphi(n)$:
+\begin{align*}
+b^2\;\;\text{mod }\varphi(n)&=\left(\frac{\varphi(n)}{2}+1\right)^2\;\;\text{mod }\varphi(n)\\
+&=\frac{\varphi(n)^2}{4}+\varphi(n)+1\;\;\text{mod }\varphi(n)\\
+&=4^{-1}\;\;\text{mod }\varphi(n)\cdot\varphi(n)^2\;\;\text{mod }\varphi(n)+\varphi(n)\;\;\text{mod }\varphi(n)+1\;\;\text{mod }\varphi(n)\\
+&=4^{-1}\;\;\text{mod }\varphi(n)\cdot0+1\;\;\text{mod }\varphi(n)\\
+&=1\;\;\text{mod }\varphi(n)\\
+\end{align*}
+This makes it extremely easy to guess the key.
+\section*{Q6}
+\subsection*{a)}
+The message in this cryptosystem is basically masked by multiplying it by $\beta^d\;\;\text{mod }p=(\alpha^a)^d\;\;\text{mod }p$, which means that 0 does not get masked at all as anything times 0 is 0. So it is a bad choice for a message word as no encryption actually occurs.
+\subsection*{b)}
+Our opponent knows the public keys, the cipher texts and one of the messages, i.e. they know $(p,\alpha,\beta),\;(\alpha^d,\beta^dx_1),\;(\alpha^d,\beta^dx_2),\;x_1$. To avoid finding $d$ the opponent can calculate $x_1^{-1}\;\;\text{mod }p$ via the approach for finding inverses used in Q5a), i.e. applying Euler's theorem and fast exponentiation. Then as $\beta^dx_1$ is known we multiply this value by $x_1^{-1}$ to obtain $\beta^d$. We can again find the inverse of $\beta^d$ mod p via the previously suggested method. Finally multiply $\beta^dx_2$ by $(\beta^d)^{-1}$ to obtain $x_2$.
+\end{document}

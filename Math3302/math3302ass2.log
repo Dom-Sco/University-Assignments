@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.11)  21 APR 2023 01:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.7.11)  25 APR 2023 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**stat3004ass3.tex
-(./stat3004ass3.tex
+**math3302ass2.tex
+(./math3302ass2.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -530,7 +530,12 @@ File: pgflibraryarrows.meta.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfarrowlength=\dimen271
 \pgfarrowwidth=\dimen272
 \pgfarrowlinewidth=\dimen273
-))) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/pythonhighlight/pythonhighlight.sty
+Package: pythonhighlight 2017/02/09 python code highlighting; provided by Olivi
+er Verdier <olivier.verdier@gmail.com>
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count283
 \lst@gtempboxa=\box62
 \lst@token=\toks45
@@ -554,6 +559,7 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
+)
 \c@theorem=\count291
 \c@corollary=\count292
 
@@ -562,8 +568,8 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count293
 \l__pdf_internal_box=\box64
 )
-(./stat3004ass3.aux)
-\openout1 = `stat3004ass3.aux'.
+(./math3302ass2.aux)
+\openout1 = `math3302ass2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
@@ -626,51 +632,333 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 60.
-
-
-Overfull \hbox (52.52655pt too wide) detected at line 60
-[]
+Overfull \hbox (4.11923pt too wide) in paragraph at lines 33--35
+\OT1/cmr/m/n/10 From this we know that $\OML/cmm/m/it/10 a \OMS/cmsy/m/n/10 2 f
+\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 3\OML/cmm/m/it/10 ; \OT1/cm
+r/m/n/10 5\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 7\OML/cmm/m/it/10 ; \OT1/cmr/m/n/1
+0 9\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 11\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 15\O
+ML/cmm/m/it/10 ; \OT1/cmr/m/n/10 17\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 19\OML/cm
+m/m/it/10 ; \OT1/cmr/m/n/10 21\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 23\OML/cmm/m/i
+t/10 ; \OT1/cmr/m/n/10 25\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 27\OML/cmm/m/it/10 
+; \OT1/cmr/m/n/10 29\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 31\OML/cmm/m/it/10 ; \OT
+1/cmr/m/n/10 33\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 35\OMS/cmsy/m/n/10 g$\OT1/cmr
+/m/n/10 .
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (21.97932pt too wide) detected at line 85
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 79.
+ [3] [4]
+[5]
+Overfull \hbox (100.83379pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 From this we get that the two most likely shifts for the 5 ar-r
+ays were $[[13\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 17]\OML/cmm/m/it/10 ; \OT1/cmr
+/m/n/10 [8\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 3]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/
+10 [17\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 21]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 
+[4\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 [17\O
+ML/cmm/m/it/10 ; \OT1/cmr/m/n/10 21]]$.
+ []
+
+
+Overfull \hbox (49.29234pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 text is MY-FA-THERS-FAM-I-LY-NAME-BE-ING-PIR-RI-PAND-MY-CHRIS-T
+IAN-NAMEPHILIP-
+ []
+
+
+Overfull \hbox (16.04128pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 MY-IN-FANTTONGUE COULD-MAKE-OF-BOTH-NAMES-NOTH-IN-G-LONGEROR-
+ []
+
+
+Overfull \hbox (28.33298pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 MORE-EX-PLICIT-THANPIP-SOICALLEDMYSELF PI-PAND-CAME-TO-BE-CALLE
+D-
+ []
+
+
+Overfull \hbox (18.40231pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 PIPI-GIVEPIR-RI-PAS-MY-FA-THERS-FAM-I-LY-NAME-ONTHEAUTHORITY OF
+HIS-
+ []
+
+
+Overfull \hbox (24.8618pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 TOMB-STONE-AND-M-Y-SIS-TERMRSJOE-GARGERY-WHOMAR-RIEDTHE-BLACK-
+ []
+
+
+Overfull \hbox (5.69394pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SMITHASINEVER SAWMY-FA-THERORMY-MOTHERAND-N-EV-ER-SAWANY-
+ []
+
+
+Overfull \hbox (13.1246pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 LIKE-NES-SOFEI-THEROFTHEM-FORTHEIRDAYS WERE-LONG-BE-FORE-THE-
+ []
+
+
+Overfull \hbox (22.01456pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 DAYSOF-PHO-TOGRAPHSMY-FIRST-FAN-CIES-RE-GARD-ING-WHATTHEYWERE
+ []
+
+
+Overfull \hbox (1.80624pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 LIKEW-ERE-UN-REA-SON-ABLY-DERIVED-FROMTHEIR-TOMB-STON-ES-THE-
+ []
+
+
+Overfull \hbox (6.45787pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SHAPE-OFTHELETTERSONMY FA-THERS-GAVE-MEAN-OD-DIDEATHATHE-
+ []
+
+
+Overfull \hbox (29.02733pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 WASASQUARESTOUT-DARK-MAN-WITH-CURLY-BLACKHAIR FROMTHECHAR-
+ []
+
+
+Overfull \hbox (35.55627pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 AC-TERAND-TURNOFTHEIN-SCRIP-TION-AL-SO-GE-OR-GIANAW-IFE-OFTHEAB
+OVE
+ []
+
+
+Overfull \hbox (7.91727pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 IDREWACHILD-ISH-CON-CLU-SION-THAT-MY-MOTH-ER-WAS-FRECK-LEDAND-
+ []
+
+
+Overfull \hbox (22.29129pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SICK-LYTOFIVELITTLE STONELOZENGE-SEACH-ABOUTAFOOTAN-DA-HALF-
+ []
+
+
+Overfull \hbox (26.73561pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 LONG-WHICH-W-ERE-AR-RANGE-D-I-NANEATROW BESIDE-THEIR-GRAVE-ANDW
+-
+ []
+
+
+Overfull \hbox (34.79129pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 ERE-SA-CRED-TOTHE-MEM-O-RY-OF-FIVELIT-TLE-BROTH-ER-SOF MINEWHOG
+AVE-
+ []
+
+
+Overfull \hbox (38.40225pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 UP-TRY-ING-TO-GE-TAL-IVINGEX-CEED-ING-LYEAR-LYINTHATU-NI-VER-SA
+L STRUG-
+ []
+
+
+Overfull \hbox (24.584pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 GLEIA-MIN-DEBT-ED-FORA-BELIEFIRE-LI-GIOUS-LYEN-TER-TAINEDTHATTH
+EY-
+ []
+
+
+Overfull \hbox (32.36069pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 HADALLBEEN BORNON-THEIR-BACK-SWITH-THEIRHANDSINTHEIRTROUSER-
+ []
+
+
+Overfull \hbox (48.47186pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SPOCK-ET-SAND-HAD-N-EVERTAKENTHE MOUTINTHISSTA-TE-OFEX-IS-TENCE
+OUR-
+ []
+
+
+Overfull \hbox (5.69392pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SWASTHE-MARSH-COUN-TRY-DOWN-BYTHERIVERWI THI-NAS-THERIVER-
+ []
+
+
+Overfull \hbox (13.05515pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 WOUNDTWEN-TYMILE-SOFT-HE-SEAMY-FIRST-MOST-VIVI-DAND-BROAD IM-
+ []
+
+
+Overfull \hbox (19.3063pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 PRES-SIONOFTHEI-DEN-TI-TY-OFTHINGSSEEM-STOME-TO-HAVE-BEEN-GAINE
+-
+ []
+
+
+Overfull \hbox (8.40227pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 TIMEIFOUND-OUT-FORCER-TAINTHATTHISBLEAKPLACEOVER GROWN-
+ []
+
+
+Overfull \hbox (107.77853pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 WITH-NET-TLESWASTHECHURCH-YARDANDTHAT-PHILIP-PIR-RIPLA-TE-OFTHI
+SPARISHANDAL
+ []
+
+
+Overfull \hbox (49.86185pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SO-GE-OR-GIANAW-IFE-OFTHE-ABOVEW-ERE-DEADAND-BURIEDANDTHATALEXA
+N-
+ []
+
+
+Overfull \hbox (81.18024pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 DER-BARTHOLOMEWABRA HAM-TO-BI-ASAN-DROGER-IN-FANTCHIL-DRENOFTHE
+AFORE-
+ []
+
+
+Overfull \hbox (5.97173pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SAID-W-E-RE-AL-SODEADAND-BURIEDAND THATTHEDARK-FLATWILDER-
+ []
+
+
+Overfull \hbox (18.75067pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 NESS-BE-YONDTHECHURCH-YARDINTER-SECT-ED-WITH-DYKESANDMOUND
+ []
+
+
+Overfull \hbox (6.80615pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 SANDGATESWITH-SCAT-TERED-CAT-TLE-FEEDIN-GO-NIT-WASTHE-MARSH-
+ []
+
+
+Overfull \hbox (46.38849pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 E-SANDTHATTHELOW LEAD-EN-LINEBE-YOND-WASTHERIVERANDTHATTHEDIS-
+ []
+
+
+Overfull \hbox (82.08292pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 TANTSAV-AGE-LAIR-FROMWHICHTHEWIND WAS-RUSH-ING-WASTHE-SEAANDTHA
+TTHES-
+ []
+
+
+Overfull \hbox (3.19513pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 MALL-BUNDLE-OF-SHIV-ERS-GROWINGAFRAIDOFITALLANDBEGINNING
+ []
+
+
+Overfull \hbox (26.38951pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 TOCRY-WASPIPHOLDY-OURNOISE-CRIEDATER-RI-BLEVOICEASAMANSTART-
+ []
+
+
+Overfull \hbox (13.74954pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 KEEP-STIL-LY-OULIT-TLEDEV-ILO-RILL-CU-TY-OURTHROATAFEARFUL MAN-
+
+ []
+
+
+Overfull \hbox (30.20897pt too wide) in paragraph at lines 217--246
+\OT1/cmr/m/n/10 ALLINCOARSEG-REY-WITH-A-GREATIRONON-HISLEGA-MAN-WITH-NO-HATAND-
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 250--252
+
+ []
+
+
+Overfull \hbox (45.30513pt too wide) in paragraph at lines 271--272
+\OT1/cmr/m/n/10 in the ta-ble, for ex-am-ple SE-CRET-CODE be-comes FA,DA,DV,VX,
+DA,AG,DV,VF,FG,DA.
+ []
+
+! Undefined control sequence.
+l.298 \newline\href
+                   {https://web.archive.org/web/20100503103848/http://www.ve...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.298 ...3103848/http://www.vectorsite.net/ttcode_
+                                                  04.html#m3}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! You can't use `macro parameter character #' in math mode.
+l.298 ...http://www.vectorsite.net/ttcode_04.html#
+                                                  m3}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Extra }, or forgotten $.
+l.298 ...p://www.vectorsite.net/ttcode_04.html#m3}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.299 \section
+              *{Q5}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--299
+
+ []
+
+
+Overfull \hbox (53.6838pt too wide) in paragraph at lines 295--299
+\OT1/cmr/m/n/10 https://web.archive.org/web/20100503103848/http://www.vectorsit
+e.net/ttcode$[]4\OML/cmm/m/it/10 :htmlm\OT1/cmr/m/n/10 3$ 
+ []
+
+[7] [8]
+Overfull \hbox (16.52988pt too wide) detected at line 345
 []
  []
 
-[3] [4] (./stat3004ass3.aux) ) 
+[9] (./math3302ass2.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 298 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 15891 strings out of 481239
- 312698 string characters out of 5920377
- 535724 words of memory out of 5000000
- 30856 multiletter control sequences out of 15000+600000
- 540882 words of font info for 60 fonts, out of 8000000 for 9000
+ 16714 strings out of 481239
+ 321009 string characters out of 5920377
+ 968055 words of memory out of 5000000
+ 31668 multiletter control sequences out of 15000+600000
+ 541387 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,11n,86p,477b,222s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-extra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
-mbols/msbm10.pfb>
-Output written on stat3004ass3.pdf (4 pages, 134388 bytes).
+ 67i,13n,86p,692b,1809s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsltt10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msbm10.pfb>
+Output written on math3302ass2.pdf (9 pages, 166180 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

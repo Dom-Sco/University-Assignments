@@ -30,14 +30,13 @@
 \maketitle
 \section*{Q1}
 \subsection*{i)}
-Bayesian
-\subsection*{ii)}
 The complete-data log likelihood is given by:
 $$\log L_c(\Psi)=\sum_{i=1}^{2}\sum_{j=1}^{N}z_{ij}\{\log\pi_i+\log\phi(w_j;\mu_i,\sigma_i^2)\}$$
 We observe the data:
 $$\bold{y}=(w_1,...,w_{n+m},\bold{z}_1^T,...,\bold{z}_n^T)^T$$
 And we are missing the component-indicator variables:
 $$\bold{Z}=(\bold{z}_{n+1}^T,...,\bold{z}_{n+m}^T)^T$$
+\subsection*{ii)}
 We see that the complete-data log likelihood is linear in the missing component-indicator variables. The conditional expectation of $\log L_c(\Psi)$ and hence the $Q$-function is obtained simply by replacing
 each missing $z_{ij}$ by its conditional expectation given the observed data y. Thus we have that:
 \begin{align*}
@@ -53,19 +52,49 @@ Where:
 \end{align*}
 is the posterior probability that $z_{ij} = 1$ given the observed value $w_j$.
 \subsection*{iii)}
-Given that $Q(\Psi;\Psi^{(k)})$ has the same form as the complete-data log likelihood with the unobserved $z_{ij}$ replaced by $\tau_i(w_j;\Psi^{(k)})$, the updated iterate $\Psi^{(k+1)}$ is given by replacing the unobserved $z_{ij}$ with the $\tau_i(w_j;\Psi^{(k)})$. we also note that the ML estimate is the one derived in tutorial sheet 5, Q3 (ii).
+In order to find the updates we take the partial derivatives of the $Q-$function wrt the parameters. First we note that $\log\phi(\Psi)(w_j;\mu_i,\sigma_i^2)=-\frac{1}{2}\log(2\pi\sigma_i^2)-\frac{(w_j-\mu_i)^2}{2\sigma_i^2}$. Now let $\mathcal{L}(\psi)=Q(\Psi;\Psi^{(k)})+\lambda(\sum_{i=1}^{2}\pi_i-1)$. Now:
 \begin{align*}
-\pi_1^{(k+1)}&=\frac{\sum_{j=1}^{N}\omega_1(w_j;\Psi^{(k)})}{N}\\
-\mu_i^{(k+1)}&=\frac{\sum_{j=1}^{N}\omega_i(w_j;\Psi^{(k)})w_j}{\sum_{j=1}^{N}\omega_i(w_j;\Psi^{(k)})}\;\;\;(i=1,2)\\
-\sigma_i^{(k+1)^2}&=\frac{\sum_{j=1}^{N}\omega_i(w_j;\Psi^{(k)})(w_j-\bar{w_i})^2}{\sum_{j=1}^{N}\omega_i(w_j;\Psi^{(k)})}\;\;\;(i=1,2)\\
+\frac{\partial\mathcal{L}(\psi)}{\partial\pi_1}&=\sum_{j=1}^{n_1}\frac{z_{1j}}{\pi_1}+\sum_{j=n+1}^{n+m}\frac{\tau_{1}(w_j;\Psi)}{\pi_1}+\lambda=0\\
+\iff\hat{\pi_1}&=\frac{\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi)}{-\lambda}\\
 \end{align*}
-Where:
-$$\omega_i(w_j;\Psi^{(k)})=\begin{cases}
-\tau_{i}(w_j;\Psi^{(k)})\;\;\;\text{if }z_{ij}\text{ was not observed}\\
-z_{ij}\;\;\;\text{else}
-\end{cases}$$
+The estimator for $\pi_2$ is similar and we also have:
+\begin{align*}
+\sum_{i=1}^{2}\pi_i=1&=\frac{\sum_{j=1}^{n_1}z_{1j}+\sum_{n+1}^{n+m}\tau_{1}(w_j;\Psi)}{-\lambda}+\frac{\sum_{j=n_1+1}^{n}z_{2j}+\sum_{n+1}^{n+m}\tau_{2}(w_j;\Psi)}{-\lambda}\\
+\iff-\lambda&=\sum_{j=1}^{n_1}z_{1j}+\sum_{n+1}^{n+m}\tau_{1}(w_j;\Psi)+\sum_{j=n_1+1}^{n}z_{2j}+\sum_{n+1}^{n+m}\tau_{2}(w_j;\Psi)\\
+&=n_1+(n-n_1)+(N-n)\\
+&=N\\
+\end{align*}
+So we get:
+\begin{align*}
+\pi_1^{(k+1)}&=\frac{\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}{N}\\
+&=\frac{n_1+\sum_{j=n}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}{N}\\
+\end{align*}
+Now we take the derivative wrt $\mu_1$:
+\begin{align*}
+\frac{\partial Q(\Psi;\Psi^{(k)})}{\partial\mu_1}&=\sum_{j=1}^{n_1}\frac{z_{1j}(w_j-\mu_1)}{\sigma_1^2}+\sum_{j=n+1}^{n+m}\frac{\tau_{1}(w_j;\Psi)(w_j-\mu_1)}{\sigma_1^2}=0\\
+\iff\mu_1\left(\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi)\right)&=\sum_{j=1}^{n_1}z_{1j}w_j+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi)w_j\\
+\iff\mu_1^{(k+1)}&=\frac{\sum_{j=1}^{n_1}z_{1j}w_j+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})w_j}{\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}\\
+&=\frac{\sum_{j=1}^{n_1}w_j+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})w_j}{n_1+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}\\
+\end{align*}
+Similarly:
+$$\mu_2^{(k+1)}=\frac{\sum_{j=n_1+1}^{n}w_j+\sum_{j=n+1}^{n+m}\tau_{2}(w_j;\Psi^{(k)})w_j}{n_2+\sum_{j=n+1}^{n+m}\tau_{2}(w_j;\Psi^{(k)})}\\$$
+Now we calculate the derivative wrt to the variance:
+\begin{align*}
+\frac{\partial Q(\Psi;\Psi^{(k)})}{\partial\sigma_1^2}&=\sum_{j=1}^{n_1}-\frac{z_{1j}}{2\sigma_1^2}+\frac{z_{1j}(w_j-\mu_1)^2}{2(\sigma_1^2)^2}+\sum_{j=n+1}^{n+m}-\frac{\tau_{1}(w_j;\Psi)}{2\sigma_1^2}+\frac{\tau_{1}(w_j;\Psi)(w_j-\mu_1)^2}{2(\sigma_1^2)^2}=0\\
+\iff\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi)&=\sum_{j=1}^{n_1}\frac{z_{1j}(w_j-\mu_1)^2}{\sigma_1^2}+\sum_{j=n+1}^{n+m}\frac{\tau_{1}(w_j;\Psi)(w_j-\mu_1)^2}{\sigma_1^2}\\
+\iff\sigma_1^{2^{(k+1)}}&=\frac{\sum_{j=1}^{n_1}z_{1j}(w_j-\mu_1^{(k)})^2+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})(w_j-\mu_1^{(k)})^2}{\sum_{j=1}^{n_1}z_{1j}+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}\\
+&=\frac{\sum_{j=1}^{n_1}(w_j-\mu_1^{(k)})^2+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})(w_j-\mu_1^{(k)})^2}{n_1+\sum_{j=n+1}^{n+m}\tau_{1}(w_j;\Psi^{(k)})}\\
+\end{align*}
+Similarly:
+$$\sigma_2^{2^{(k+1)}}=\frac{\sum_{j=n_1+1}^{n}(w_j-\mu_2^{(k)})^2+\sum_{j=n+1}^{n+m}\tau_{2}(w_j;\Psi^{(k)})(w_j-\mu_2^{(k)})^2}{n_2+\sum_{j=n+1}^{n+m}\tau_{2}(w_j;\Psi^{(k)})}$$
 \subsection*{iv)}
- 
+From lecture notes 7 we know that if we assume:
+\begin{align*}
+(1)&\;\;\Omega\text{ is a subset in d-dimensional Euclidean space }\mathbb{R}^d\\
+(2)&\;\;\Omega_{\Psi_{o}}=\{\Psi\in\Omega:L(\Psi)\geq L(\Psi_{o})\}\text{ is compact for any }L(\Psi_{o})>-\infty\\
+(3)&\;\;L(\Psi)\text{ is continuous and differentiable in the interior of }\Omega\\
+\end{align*}
+that we will get convergence of the EM algorithm. In our case the second regularity condition does not hold as each data point $w_j$ gives rise to a singularity in $L(\Psi)$ on the edge of the parameter space $\Omega$. More specifically, if $\mu_1(\mu_2)$ is set equal to $w_j$ , then $L(\Psi)$ tends to infinity as $\sigma_1^2(\sigma_2^2)$ tends to zero. Thus in this example, if $\Psi_{o}$ is any point in $\Omega$ with $\mu_1$ or $\mu_2$ set equal to $w_j$, then clearly $\Omega_{\Psi_{o}}$ is not compact. This space can be made compact by imposing the constraint $\sigma_i^2>\epsilon (i = 1, 2)$. So the maximum we want, $\Psi^{(k+1)}$ will be a solution of $\frac{\partial Q(\Psi;\Psi^{(k)})}{\partial\Psi}=\bold{0}$ and hence we can assume that the $Q$-function is globally maximised. We also note that this will not hold for EM sequences started sufficiently close to the boundary of the modified parameter space. We fix this issue in V) by setting obvious intial values to the parameters.
 \subsection*{v)}
 The obvious initialisation is to first consider the labelled data and set $\pi_1$ to be the proportion of that data labelled as being in class 1, $\pi_2=1-\pi_1$, $\mu_i\;\;(i\in\{1,2\})$ the mean of the data from class $i$ and $\sigma_i^2$ the variation of the data from class $i$. The mean and variation can be calculated through the standard ML estimates for the normal distribution:
 \begin{align*}
@@ -74,9 +103,37 @@ The obvious initialisation is to first consider the labelled data and set $\pi_1
 \sigma_1^2&=\frac{1}{n_1}\sum_{j=1}^{n_1}(w_j-\mu_1)^2\\
 \sigma_2^2&=\frac{1}{n_2}\sum_{j=n_1+1}^{n}(w_j-\mu_2)^2\\
 \end{align*}
-And $\pi_1$ can be calculated through the ML estimates for the categorical distribution:
+And $\pi_1$ can be calculated through the ML estimate for the categorical distribution:
 $$\pi_1=\frac{n_1}{n}$$
+We also see that these are exactly the ML extimates for known data from a mixture of Gaussians with known classes as derived in tutorial sheet 5 Q3 (ii).
 \section*{Q2}
 \subsection*{i)}
+Assuming the classes are independent, the first $n_1$ data points come from the first normal distribution, the second $n_2$ data points from the second normal distribution and the remaining $m$ data points from the mixture, the complete-data log likelihood is then given by:
+$$L_{c}(\Psi)=\sum_{j=1}^{n_1}\phi(w_j;\mu_1,\sigma_1^2)+\sum_{j=n_1}^{n}\phi(w_j;\mu_2,\sigma_2^2)+\sum_{i=1}^{2}\sum_{j=n+1}^{n+m}z_{ij}\log\phi(w_j;\mu_i,\sigma_i^2)$$
+As the complete-data log likelihood is linear in the missing components we get:
+\begin{align*}
+Q(\Psi;\Psi^{(k)})&=\sum_{j=1}^{n_1}\log\phi(w_j;\mu_1^{(k)},\sigma_2^{2^{(k)}})\\
+&+\sum_{j=n_1+1}^{n}\log\phi(w_j;\mu_2^{(k)},\sigma_2^{2^{(k)}})\\
+&+\sum_{i=1}^{2}\sum_{j=n+1}^{n+m}\tau_{i}(w_j;\Psi^{(k)})\log\phi(w_j;\mu_i^{(k)},\sigma_i^{2^{(k)}})\\
+\end{align*}
+Where:
+\begin{align*}
+\tau_{i}(w_j;\Psi^{(k)})&=\mathbb{E}_{\Psi^{(k)}}\{z_{ij}|\bold{y}\}\\
+&=\mathbb{P}_{\Psi^{(k)}}\{z_{ij}=1|\bold{y}\}\\
+&=\frac{\pi_i\phi(w_j;\mu_i^{(k)},\sigma_i^{(k)^2})}{\sum_{h=1}^{2}\pi_{h}\phi(w_j;\mu_h^{(k)},\sigma_h^{(k)^2})}\\
+\end{align*}
 \subsection*{ii)}
+To find the updates we take the derivatives wrt the parameters, however we notice we will get the same updates as in Q1 for the parameters $\mu_1,\;\;\mu_2,\;\;\sigma_1^2$ and $\sigma_2^2$. This is because the only difference in the $Q$-function is the $\log\pi_i$ terms which disappear when taking the derivative wrt anything that isn't $\pi_i$ anyways. Now we will take a similar approach as in Q1 to derive the update for $\pi_1$. Consider $\mathcal{L}(\Psi)=Q(\Psi;\Psi^{(k)})+\lambda(\sum_{i=1}^{2}\pi_i-1)$. Now:
+\begin{align*}
+\frac{\partial\mathcal{L}(\Psi)}{\partial\pi_i}&=\sum_{j=n+1}^{n+m}\frac{\tau_{i}(w_j;\Psi)}{\pi_i}+\lambda=0\\
+\iff\pi_i&=\frac{\sum_{j=n+1}^{n+m}\tau_{i}(w_j;\Psi)}{-\lambda}\\
+\end{align*}
+We also now have:
+\begin{align*}
+\sum_{i=1}^{2}\pi_i&=1=\frac{\sum_{i=1}^{2}\sum_{j=n+1}^{n+m}\tau_{i}(w_j;\Psi)}{-\lambda}\\
+\iff-\lambda&=\sum_{i=1}^{2}\sum_{j=n+1}^{n+m}\tau_{i}(w_j;\Psi)\\
+&=m\\
+\end{align*}
+So the update for $\pi_1$ is:
+$$\pi_1^{(k+1)}=\frac{\sum_{j=n+1}^{n+m}\tau_{i}(w_j;\Psi^{(k)})}{m}$$
 \end{document}

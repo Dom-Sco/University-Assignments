@@ -54,17 +54,35 @@ First we note that $N((a,b])\sim Poi(2\cdot(b-a))$.
 &=\frac{1}{\mathbb{P}(N(1,12]=10)}\sum_{t=0}^{10}t\cdot\mathbb{P}(N(1,2]=t,N(2,12]=10-t)\\
 &=\frac{1}{\mathbb{P}(N(1,12]=10)}\sum_{t=0}^{10}t\cdot\mathbb{P}(N(1,2]=t)\mathbb{P}(N(2,12]=10-t)\\
 &=\frac{1}{\frac{e^{-22}(22)^{10}}{10!}}\sum_{t=0}^{10}t\cdot\frac{e^{-2}(2)^t}{t!}\frac{e^{-20}(20)^{10-t}}{(10-t)!}\\
+&=\frac{1}{(22)^{10}}\sum_{t=0}^{10}{10 \choose t}t\cdot(2)^t(20)^{10-t}\\
+&=\frac{24145384355840}{22^{10}}\\
 &=\frac{10}{11}\\
 \end{align*}
 \subsection*{d)}
 \begin{align*}
 \mathbb{E}[N(t_1-1,t_2]\;|\;N(1,t_1]=n_1]&=\mathbb{E}[N(1,12]\;|\;N(1,2]=7]\\
 &=\sum_{t\geq0}t\cdot\mathbb{P}(N(1,12]=t|N(1,2]=7)\\
-&=\sum_{t\geq0}t\cdot\mathbb{P}(N(1,12]=t|N(1,2]=7)\\
-&=\sum_{t\geq0}t\cdot\frac{\mathbb{P}(N(1,12]=t,N(1,2]=7)}{\mathbb{P}(N(1,2]=7)}\\
-&=\sum_{t\geq0}t\cdot\frac{\mathbb{P}(N(2,12]=t+7,N(1,2]=t)}{\mathbb{P}(N(1,2]=7)}\\
+&=\sum_{t\geq7}t\cdot\mathbb{P}(N(1,12]=t|N(1,2]=7)\\
+&=\sum_{t\geq7}t\cdot\frac{\mathbb{P}(N(1,12]=t,N(1,2]=7)}{\mathbb{P}(N(1,2]=7)}\\
+&=\sum_{t\geq7}t\cdot\frac{\mathbb{P}(N(2,12]=t-7)\mathbb{P}(N(1,2]=7)}{\mathbb{P}(N(1,2]=7)}\\
+&=\sum_{t\geq7}t\cdot\mathbb{P}(N(2,12]=t-7)\\
+&=\sum_{t\geq7}t\cdot\frac{e^{-20}20^{t-7}}{(t-7)!}\\
+&=\sum_{x\geq0}(x+7)\cdot\frac{e^{-20}20^{x}}{x!},\;\;\;\text{note }x=t-7\\
+&=\sum_{x\geq0}x\cdot\frac{e^{-20}20^{x}}{x!}+7\sum_{x\geq0}\frac{e^{-20}20^{x}}{x!}\\
+&=\mathbb{E}[x]+7\cdot1,\;\;\;x\sim Poi(20)\\
+&=20+7\\
+&=27\\
 \end{align*}
 \section*{Q2}
+First note that $N_{t+s}-N_{t}\sim Poi\left(\int_{t}^{t+s}\lambda(t)dt\right)$
+\begin{align*}
+\mathbb{P}(N_{s}=m|N_{t}=n)&=\frac{\mathbb{P}(N_{s}=m,N_{t}=n)}{\mathbb{P}(N_{t}=n)}\\
+&=\frac{\mathbb{P}(N_{s}=m,N_{t\cap s^{c}}=n-m)}{\mathbb{P}(N_{t}=n)}\\
+&=\frac{\mathbb{P}(N_{s}=m)\mathbb{P}(N_{t\cap s^{c}}=n-m)}{\mathbb{P}(N_{t}=n)}\\
+&=\frac{\frac{\left(\int_{0}^{s}1-e^{-t}dt\right)^me^{-\int_{0}^{s}1-e^{-t}dt}}{m!}\frac{\left(\int_{s}^{t}1-e^{-t}dt\right)^{n-m}e^{-\int_{s}^{t}1-e^{-t}dt}}{(n-m)!}}{\frac{\left(\int_{0}^{t}1-e^{-t}dt\right)^ne^{-\int_{0}^{t}1-e^{-t}dt}}{n!}}\\
+&=\frac{n!(s-1+e^{-s})^me^{1-s-e^{-s}}(t-s+e^{-t}-e^{-s})^{n-m}e^{t-s+e^{-t}-e^{-s}}}{m!(n-m)!(t-1+e^{-t})^ne^{1-t-e^{-t}}}\\
+&={n\choose m}e^{2e^{-t}-2e^{-s}+2t-2s}\frac{(s-1+e^{-s})^m(t-s+e^{-t}-e^{-s})^{n-m}}{(t-1+e^{-t})^n}\\
+\end{align*}
 \section*{Q3}
 \subsection*{a)}
 \subsection*{b)}
