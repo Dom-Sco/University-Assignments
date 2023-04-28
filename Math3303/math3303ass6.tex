@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd}
+\usepackage{amssymb}
+
+\title{Math3303 Assignment 5}
+\author{Dominic Scocchera}
+\date{April 2023}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+\maketitle
+\section*{Q1}
+Let R be an integral domain such that $(a_0)\supseteq(a_1)\supseteq(a_2)\supseteq...$ implies that $(a_n)=(a_{n+1})=...$ for n sufficiently large. Now we want to show that R is a field.
+\begin{proof}
+As R is an integral domain for R to also be a field we require that every element of R has a multiplicative inverse. We will show that every element has a multiplicative inverse via a proof by contradiction. Suppose $a_0$ is not a unit. We also have that $(a_n)=(a_{n+1})$ for n sufficiently large. This means that $a_n\in(a_{n+1})$, so we have that for some $r\in R$ (noting that we have commutivity and distributivity as R is an integral domain):
+\begin{align*}
+a_n&=ra_{n+1}\\
+\iff a_n-ra_{n+1}&=0\\
+\iff a_n-ra_na_0&=0\\
+\iff a_n-a_nra_0&=0\\
+\iff a_n(1-ra_0)&=0\\
+\end{align*}
+As R is an integral domain this means that $1=ra_0$, i.e. $a_0$ is a unit. Thus we have arrived at the contradiction.  
+\end{proof}
+\section*{Note on Q2 and Q3}
+In Q2 and Q3 we will often consider the partial ordering of ideals of a commutative ring R with identity, where the ordering is given by $\subseteq$. It is not hard to see that the zero ideal is a subset of all other ideals (an ideal in a commutative ring requires $rx=xr\in I$, $\forall x\in I$ and $\forall r\in R$ and as $0\in R$ we have that 0 must always be in an ideal). We also have by theorem 9.22 from Gregory Lee's abstract algebra that every maximal ideal in this ring is a prime ideal and we also note that each of these ideals is a subset of the ring itself. Thus we see that ideals with subset ordering form a finite partially ordered set with all elements bounded above by R and below by the zero ideal.
+\section*{Q2}
+Let I be an ideal in a commutative unital ring R. Define
+$$\hat{I}:= \{r \in R | r^n\in I \text{ for some } n\in\mathbb{Z}>0\}.$$
+We first prove that for $S=\{r,r^2,...\}$ and $I$, an ideal disjoint from $S$, i.e. $r^n\notin I$ for any $n$, there is a prime ideal that contains $I$ and is disjoint from $S$.
+\begin{proof}
+First note that a prime ideal ($\mathcal{P}$) must satisfy 1) $\mathcal{P}\neq$R and 2) if $a,b\in$R and $ab\in\mathcal{P}$ then $a\in\mathcal{P}$ or $b\in\mathcal{P}$. In this proof we will show the equivalent condition of 2),  $a\notin\mathcal{P}$ and $b\notin\mathcal{P}$ then $ab\notin\mathcal{P}$. As $r^n\notin I$ we must have $I\neq R$. Now from Gregory Lee's Abstract Algebra theorem 9.22 we have that every maximal ideal of R is also a prime ideal. This means that if we partially order the ideals from $I$ with the order being given by $\subseteq$, $\exists\mathcal{P}$ such that $\mathcal{P}\geq I$. So we now have condition 1 as each chain from $I$ is bounded above by a maximal prime ideal. If one of these maximal prime ideals does not intersect with $S$ we are done, however this not guarenteed so we now consider the subset of ideals in the partial ordering that don't intersect with $S$. We know that this subset of the partial ordering is non-empty as $r^n\notin I$. From this we now consider an ideal $Q$ that is maximal in a chain of this subset. As this subset is finite and non-empty we know that such a $Q$ exists. If we consider two ideals $A$ and $B$ that follow from Q in the partial ordering we must have $r^i\in A$ and $r^j\in B$ for some $i,j\in\mathbb{Z}_{>0}$. Now if we consider a third ideal $C$ with $r^{i+j}\in C$ we must have $A\subseteq C$ and $B\subseteq C$. This now gives $r^i\notin Q$ and $r^j\notin Q$ then $r^{i+j}\notin Q$, thus condition 2) is satisfied and Q is a prime ideal containing $I$.
+\end{proof}
+\noindent We now want to show that $\hat{I}$ equals the intersection of all prime ideals of R which contain $I$.
+\begin{proof}
+First let $\mathcal{P}$ be some prime ideal containing $I$. We will prove this by proving two relations:
+\begin{align*}
+(1)\;\;\hat{I}\subseteq\bigcap_{I\leq\mathcal{P}}\mathcal{P}\\
+(2)\;\;\hat{I}\supseteq\bigcap_{I\leq\mathcal{P}}\mathcal{P}\\
+\end{align*}
+Where $\bigcap_{I\leq\mathcal{P}}\mathcal{P}$ is the intersect of all prime ideals containing $I$.
+\newline\newline
+(1)
+\newline
+If $\mathcal{P}$ is some prime ideal containing $I$ and we have some $r\in R$ such that $r^n\in I$, then as $I\leq\mathcal{P}$ we have $r^n\in\mathcal{P}$ and as $\mathcal{P}$ is a prime ideal we also must have $r\in\mathcal{P}$.
+\newline\newline
+(2)
+\newline
+Now if we consider $r\notin\hat{I}$, then $r^n\notin I$ for any $n$, so $S=\{r,r^2,...\}$ is a set disjoint from $I$. From what we first proved we know that there is a prime ideal $Q$ containing $I$ with $r\notin Q$, thus we have $r\notin\bigcap_{I\leq\mathcal{P}}\mathcal{P}$.
+\newline\newline
+These two relations immediantly imply that $\hat{I}=\bigcap_{I\leq\mathcal{P}}\mathcal{P}$.
+\end{proof}
+\section*{Q3}
+\subsection*{a)}
+$V(I)=\emptyset$ if and only if $I=$R.
+\begin{proof}
+First consider the case $I=R$. 
+\newline
+We then have $V(I)=V(R)$ and as there are no prime ideals that contain the entire ring (R is not a prime ideal as we require that a prime ideal isn't equal to R) we must have $V(I)=\emptyset$.
+\newline\newline
+Now consider the case $I\neq R$.
+\newline
+We know from theorem 9.22 of Gregory Lee's Abstract Algebra that every maximal ideal in R is a prime ideal. Now partially ordering the ideals with the ordering given by $\subseteq$ we see that all ideals $I$ such that $I\neq$R must be bounded above by a prime ideal (noting that an ideal can contain itself as ideal). Thus we always have $V(I)\neq\emptyset$.
+\end{proof}
+\subsection*{b)}
+$V(I)\cup V(J)=V(IJ)$
+\begin{proof}
+We first note the partial ordering we have constructed and the fact from Gregory Lee's Abstract Algebra page 151 that by absorbtion property, $IJ\subseteq I\cap J$ and that if we have ideals $A$ and $B$ such that $A\subseteq B$ we must have $V(A)\supseteq V(B)$ as all prime ideals contained in $B$ must also be contained in $A$ due to the partial ordering.
+\newline\newline
+(1) $V(IJ)\supseteq V(I)\cup V(J)$:
+\newline
+If we let $IJ\subseteq I\cap J=X$ we must have $X\subseteq I$, $X\subseteq J$ and $\bold{0}\subseteq X$ (This is from the partial ordering we constructed (the zero ideal must be contained in $X$)). This then gives $V(IJ)\supseteq V(X)$, $V(X)\supseteq V(I)$ and $V(X)\supseteq V(J)$. Now we see that we have (1), $V(IJ)\supseteq V(I)\cup V(J)$.
+\newline\newline
+(2) $V(IJ)\subseteq V(I)\cup V(J)$:
+\newline
+Now if we take a prime ideal $\mathcal{P}\in V(IJ)$, we want to show $\mathcal{P}\in V(I)$ or $\mathcal{P}\in V(J)$. Suppose $IJ\subseteq\mathcal{P}$ and I is not contained in $\mathcal{P}$. We now show that for all $j\in J$, we have $j\in \mathcal{P}$. Fix $j\in J$ and $i\in I\symbol{92}\mathcal{P}$ and note that $ij\in IJ$. Since $IJ\subseteq \mathcal{P}$, we have that $ij\in\mathcal{P}$ but $\mathcal{P}$ is prime, so we must have that either $i\in\mathcal{P}$ or $j\in\mathcal{P}$. Since $i\notin\mathcal{P}$ (This is because $i\in I\symbol{92}\mathcal{P}$), we conclude that $j\in J$. This shows that $J\subseteq \mathcal{P}$. The argument is similar if we assume hat J is not contained in $\mathcal{P}$. In that case we get that $I\subseteq\mathcal{P}$. So if we have a prime ideal $\mathcal{P}\in V(IJ)$, then $\mathcal{P}\in V(I)$ or $\mathcal{P}\in V(J)$. This then implies (2), $V(IJ)\subseteq V(I)\cup V(J)$.
+\newline\newline
+From (1) and (2) we must have equality which is what we wanted to show.
+\end{proof}
+\subsection*{c)}
+Let $\{I_\alpha\}$ be a set of ideals of R. Then $\cap_\alpha V(I_\alpha)=V(\sum_{\alpha}I_\alpha)$.
+\begin{proof}
+\end{proof}
+\end{document}
