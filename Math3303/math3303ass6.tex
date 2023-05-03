@@ -17,9 +17,9 @@
 \usepackage{tikz-cd}
 \usepackage{amssymb}
 
-\title{Math3303 Assignment 5}
+\title{Math3303 Assignment 6}
 \author{Dominic Scocchera}
-\date{April 2023}
+\date{May 2023}
 
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -49,7 +49,7 @@ Let I be an ideal in a commutative unital ring R. Define
 $$\hat{I}:= \{r \in R | r^n\in I \text{ for some } n\in\mathbb{Z}>0\}.$$
 We first prove that for $S=\{r,r^2,...\}$ and $I$, an ideal disjoint from $S$, i.e. $r^n\notin I$ for any $n$, there is a prime ideal that contains $I$ and is disjoint from $S$.
 \begin{proof}
-First note that a prime ideal ($\mathcal{P}$) must satisfy 1) $\mathcal{P}\neq$R and 2) if $a,b\in$R and $ab\in\mathcal{P}$ then $a\in\mathcal{P}$ or $b\in\mathcal{P}$. In this proof we will show the equivalent condition of 2),  $a\notin\mathcal{P}$ and $b\notin\mathcal{P}$ then $ab\notin\mathcal{P}$. As $r^n\notin I$ we must have $I\neq R$. Now from Gregory Lee's Abstract Algebra theorem 9.22 we have that every maximal ideal of R is also a prime ideal. This means that if we partially order the ideals from $I$ with the order being given by $\subseteq$, $\exists\mathcal{P}$ such that $\mathcal{P}\geq I$. So we now have condition 1 as each chain from $I$ is bounded above by a maximal prime ideal. If one of these maximal prime ideals does not intersect with $S$ we are done, however this not guarenteed so we now consider the subset of ideals in the partial ordering that don't intersect with $S$. We know that this subset of the partial ordering is non-empty as $r^n\notin I$. From this we now consider an ideal $Q$ that is maximal in a chain of this subset. As this subset is finite and non-empty we know that such a $Q$ exists. If we consider two ideals $A$ and $B$ that follow from Q in the partial ordering we must have $r^i\in A$ and $r^j\in B$ for some $i,j\in\mathbb{Z}_{>0}$. Now if we consider a third ideal $C$ with $r^{i+j}\in C$ we must have $A\subseteq C$ and $B\subseteq C$. This now gives $r^i\notin Q$ and $r^j\notin Q$ then $r^{i+j}\notin Q$, thus condition 2) is satisfied and Q is a prime ideal containing $I$.
+First note that a prime ideal ($\mathcal{P}$) must satisfy 1) $\mathcal{P}\neq$R and 2) if $a,b\in$R and $ab\in\mathcal{P}$ then $a\in\mathcal{P}$ or $b\in\mathcal{P}$. In this proof we will show the equivalent condition of 2),  $a\notin\mathcal{P}$ and $b\notin\mathcal{P}$ then $ab\notin\mathcal{P}$. As $r^n\notin I$ we must have $I\neq R$. Now from Gregory Lee's Abstract Algebra theorem 9.22 we have that every maximal ideal of R is also a prime ideal. This means that if we partially order the ideals from $I$ with the order being given by $\subseteq$, $\exists\mathcal{P}$ such that $\mathcal{P}\geq I$. So we now have condition 1 as each chain from $I$ is bounded above by a maximal prime ideal. If one of these maximal prime ideals does not intersect with $S$ we are done, however this not guarenteed so we now consider the subset of ideals in the partial ordering that don't intersect with $S$. We know that this subset of the partial ordering is non-empty as $r^n\notin I$. From this we now consider an ideal $Q$ that is maximal in a chain of this subset. As this subset is finite and non-empty we know that such a $Q$ exists (Zorn's lemma). If we consider two ideals $A$ and $B$ that follow from Q in the partial ordering we must have $r^i\in A$ and $r^j\in B$ for some $i,j\in\mathbb{Z}_{>0}$. Now if we consider a third ideal $C$ with $r^{i+j}\in C$ we must have $A\subseteq C$ and $B\subseteq C$. This now gives $r^i\notin Q$ and $r^j\notin Q$ then $r^{i+j}\notin Q$, thus condition 2) is satisfied and Q is a prime ideal containing $I$.
 \end{proof}
 \noindent We now want to show that $\hat{I}$ equals the intersection of all prime ideals of R which contain $I$.
 \begin{proof}
@@ -100,5 +100,16 @@ From (1) and (2) we must have equality which is what we wanted to show.
 \subsection*{c)}
 Let $\{I_\alpha\}$ be a set of ideals of R. Then $\cap_\alpha V(I_\alpha)=V(\sum_{\alpha}I_\alpha)$.
 \begin{proof}
+First note that for $I\in\{I_{\alpha}\}$ we have, $I\subseteq\sum_{\alpha}I_{\alpha}$.
+\newline\newline
+(1)$\cap_\alpha V(I_\alpha)\supseteq V(\sum_{\alpha}I_\alpha)$
+\newline
+If we have a prime ideal $\mathcal{P}$ such that $\sum_{\alpha}I_{\alpha}\subseteq\mathcal{P}$, then for any $I\in\{I_{\alpha}\}$ we get $I\subseteq\sum_{\alpha}I_{\alpha}\subseteq\mathcal{P}$. We also have $\cap_\alpha V(I_\alpha)$, which is the set of prime ideals that contain all $I_{\alpha}$. From above we see that $\mathcal{P}$ must contain all $I\in\{I_{\alpha}\}$ as all $I$ are also contained in $\sum_{\alpha}I_{\alpha}$ which itself is contained in $\mathcal{P}$.
+\newline\newline
+(2)$\cap_\alpha V(I_\alpha)\subseteq V(\sum_{\alpha}I_\alpha)$
+\newline
+Suppose we have a prime ideal $\mathcal{P}\in\cap_\alpha V(I_\alpha)$, i.e. $\mathcal{P}$ contains all $I\in\{I_{\alpha}\}$. We want to show that $\mathcal{P}\in V(\sum_{\alpha}I_\alpha)$. If we have $a\in I$ for some $I\in\{I_{\alpha}\}$ and $b\in$R such that $ab\in\mathcal{P}$ then we have either $a\in\mathcal{P}$ or $b\in\mathcal{P}$, by definition of prime ideal. We know that we must have $a\in\mathcal{P}$ from the premise. Now let $ab=i_{\alpha}b$. As ideals are closed under addition and we have this holding for every ideal in $\{I_{\alpha}\}$ we must also have $\sum_{\alpha}bi_{\alpha}=(\sum_{\alpha}i_{\alpha})b\in\mathcal{P}$ and as $b\notin\mathcal{P}$ we must have $\sum_{\alpha}i_{\alpha}\in\mathcal{P}$ from definition of prime ideal. From this we must have $\mathcal{P}\in V(\sum_{\alpha}I_\alpha)$.
+\newline\newline
+From (1) and (2) we get equality which is what we wanted to show.
 \end{proof}
 \end{document}
