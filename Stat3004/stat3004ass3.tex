@@ -81,7 +81,7 @@ First note that $N_{t+s}-N_{t}\sim Poi\left(\int_{t}^{t+s}\lambda(t)dt\right)$
 &=\frac{\mathbb{P}(N_{s}=m)\mathbb{P}(N_{t}-N_{s}=n-m)}{\mathbb{P}(N_{t}=n)}\\
 &=\frac{\frac{\left(\int_{0}^{s}1-e^{-t}dt\right)^me^{-\int_{0}^{s}1-e^{-t}dt}}{m!}\frac{\left(\int_{s}^{t}1-e^{-t}dt\right)^{n-m}e^{-\int_{s}^{t}1-e^{-t}dt}}{(n-m)!}}{\frac{\left(\int_{0}^{t}1-e^{-t}dt\right)^ne^{-\int_{0}^{t}1-e^{-t}dt}}{n!}}\\
 &=\frac{n!(s-1+e^{-s})^me^{1-s-e^{-s}}(t-s+e^{-t}-e^{-s})^{n-m}e^{t-s+e^{-t}-e^{-s}}}{m!(n-m)!(t-1+e^{-t})^ne^{1-t-e^{-t}}}\\
-&={n\choose m}e^{2e^{-t}-2e^{-s}+2t-2s}\frac{(s-1+e^{-s})^m(t-s+e^{-t}-e^{-s})^{n-m}}{(t-1+e^{-t})^n}\\
+&=\frac{e^{2e^{-t}-2e^{-s}+2t-2s}}{(t-1+e^{-t})^n}{n\choose m}(s-1+e^{-s})^m(t-s+e^{-t}-e^{-s})^{n-m}\\
 \end{align*}
 \section*{Q3}
 \subsection*{a)}
@@ -93,13 +93,18 @@ First we have that $N_A\sim Poi(\lambda|A|)=Poi(0.5\cdot0.25)=Poi(1/8)$.
 &\approx 0.1175\\
 \end{align*}
 \subsection*{b)}
-As each trip explores a new area we have that each trip is an independent Poisson process. This means if make n trips we have the Poisson process $\sum_{i=1}^{n}N_{i}\sim Poi(\sum_{i=1}^{n}\lambda|A|)=Poi(n\lambda|A|)$. So the expectation is $\mathbb{E}[\sum_{i=1}^{n}N_{i}]=n\lambda|A|=\frac{n}{8}$. Now we want to find the n that makes this greater or equal to 6, thus $n=48$ ($\frac{48}{8}=6$). Therefore we can expect to make 48 trips before we see 6 fat-tailed dunnarts. 
+As each trip explores a new area we have that each trip is an independent Poisson process. This means if make n trips we have the Poisson process $\sum_{i=1}^{n}N_{i}\sim Poi(\sum_{i=1}^{n}\lambda|A|)=Poi(n\lambda|A|)$ (super position principle). So the expectation is $\mathbb{E}[\sum_{i=1}^{n}N_{i}]=n\lambda|A|=\frac{n}{8}$. Now we want to find the n that makes this greater or equal to 6, thus $n=48$ ($\frac{48}{8}=6$). Therefore we can expect to make 48 trips before we see 6 fat-tailed dunnarts. 
 \subsection*{c)}
-If we assume the survey was also a spatial Poisson process with the same rate parameter, let A be the event that there are a total of $5\cdot10^5$ fat-tailed dunnarts over the total $29750km^2$. We then have:
-$$\mathbb{P}(A)=\frac{e^{-0.5\cdot29750}(0.5\cdot29750)^{5\cdot10^5}}{(5\cdot10^5)!}$$
+Assume the survey was also a spatial Poisson process with the same rate parameter. In the calculation we will see three seperate Poisson processes, $N_A\sim Poi(0.5\cdot0.25)=Poi(1/8)$, $N_B\sim Poi(0.5\cdot29750)=Poi(14785)$ and $N_A\sim Poi(0.5\cdot(29750-0.25))=Poi(14874.875)$. So we have that A is the area we search, B is the area that the survey searched and C is the area the survey searched minus the area we search.
 \begin{align*}
-\mathbb{P}(N_{A}\geq1|A)&=1-\mathbb{P}(N_{A}=0|A)\\
-&=1-\frac{\mathbb{P}(N_{A}=0,A)}{\mathbb{P}(A)}\\
+\mathbb{P}(N_{A}\geq1|N_B=5\cdot10^5)&=1-\mathbb{P}(N_{A}=0|N_B=5\cdot10^5)\\
+&=1-\frac{\mathbb{P}(N_{A}=0,N_B=5\cdot10^5)}{\mathbb{P}(N_B=5\cdot10^5)}\\
+&=1-\frac{\mathbb{P}(N_{A}=0)\mathbb{P}(N_C=5\cdot10^5)}{\mathbb{P}(N_B=5\cdot10^5)}\\
+&=1-\frac{\frac{e^{-(1/8)(1/8)^{0}}}{0!}\frac{e^{-(14874.875)(14874.5)^{5\cdot10^5}}}{(5\cdot10^5)!}}{\frac{e^{-(14875)(14875)^{5\cdot10^5}}}{(5\cdot10^5)!}}\\
+&=1-\frac{e^{-(1/8)}e^{-14874.875}(14874.875)^{5\cdot10^{5}}}{e^{-14875}(14875)^{5\cdot10^{5}}}\\
+&=1-\left(\frac{14874.875}{14875}\right)^{5\cdot10^{5}}\\
+&\approx1-0.01497\\
+&\approx0.98503\\
 \end{align*}
 \section*{Q4}
 \subsection*{a)}
@@ -120,7 +125,7 @@ $$Q=\begin{pmatrix}
 \subsection*{b)}
 \includegraphics[scale=0.2]{CTMC.jpeg}
 \subsection*{c)}
-We calculate the long run distribution $\pi$ by solving $\pi Q=\bold{0}$ such that $\pi\bold{1}=1$.
+We see that the chain is irreducible and positive reccurent, hence the limiting distribution $\pi$ exists and is given by solving $\pi Q=\bold{0}$ such that $\pi\bold{1}=1$.
 \begin{align*}
 0&=104\pi_0-30\pi_2\implies \pi_0=\frac{15}{52}\pi_2\;\;\;(1)\\
 0&=-108\pi_0+\pi_1+26\pi_2\implies\pi_1=108\pi_0-26\pi_2=(\frac{3240}{104}-26)\pi_2=\frac{67}{13}\pi_2\;\;\;(2)\\
@@ -132,12 +137,13 @@ $$\pi=\left(\frac{3}{283},\frac{268}{1415},\frac{52}{1415},\frac{216}{283}\right
 So the long run probability that both the machine and the machine repair
 robot are under repair is $\frac{216}{283}$.
 \subsection*{d)}
-To find the this probability we first find the transition matrix of the embedded markov chain (D), where the entry $d_{ij}=\frac{q_{ij}}{-q_{ii}}$, where $q_{ij}$ are entries from the $Q$-matrix.
-$$D=\begin{pmatrix}
-0 & \frac{4}{108} & \frac{104}{108} & 0\\
-\frac{1}{105} & 0 & 0 & \frac{104}{105}\\
-\frac{26}{30} & 0 & 0 & \frac{4}{30}\\
-0 & 1 & 0 & 0\\
-\end{pmatrix}$$
-If the machine has failed and is under repair we are in state 1 and the probability that it transitions to 0 and not 3 is from the matrix D, $\frac{1}{105}$.
+If the machine has failed and is under repair we are in state 1. Denote $T_{xyt}$ the event of transitioning from state x to state y at time t. This is an event that is exponentially distributed with parameter given by $q_{xy}$. We then find:
+\begin{align*}
+\mathbb{P}(T_{10t}<T_{13t})&=\int_{s=0}^{\infty}\int_{t=0}^{s}104e^{-t}e^{-104s}dtds\\
+&=\int_{s=0}^{\infty}-104e^{-104s}(e^{-s}-1)ds\\
+&=-104\int_{s=0}^{\infty}e^{-105s}-e^{-104s}ds\\
+&=-104\left[-\frac{1}{105}e^{-105s}+\frac{1}{104}e^{-104s}\right]_{s=0}^{\infty}\\
+&=\frac{1}{105}\\
+\end{align*}
+Note here that $\lim_{x\rightarrow\infty}e^{-x}=0$. Hence the probability that the machine repair robot fixes the machine before it itself fails is $\frac{1}{105}$.
 \end{document}

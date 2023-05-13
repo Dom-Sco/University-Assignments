@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{accents}
+\usepackage{commath}
+\usepackage{yfonts}
+\usepackage{float}
+\usepackage{array}
+\usepackage{tikz-cd}
+\usepackage{listings}
+
+\title{Stat3004 Assignment 4}
+\author{Dominic Scocchera}
+\date{May 2023}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\begin{document}
+\maketitle
+\section*{Q1}
+\subsection*{a)}
+For a $\sigma-$algebra we require it to contain $\Omega$, to be closed under complements and closed under union. We know that $\mathcal{F}_3$ must contain $\emptyset$, $\Omega$, $A_1$, $A_2$ and $A_3$. But we see that just this set is not closed under complements or unions (noting that $A_i$ is a partition of $\Omega$), so to do this we add $A_1\cup A_2$ , $A_2\cup A_3$ and $A_1\cup A_3$. Hence $\mathcal{F}_3=\{\emptyset,\Omega,A_1,A_2,A_3,A_1\cup A_2,A_2\cup A_3,A_1\cup A_3\}$, which contains 8 elements.  
+\subsection*{b)}
+In $\mathcal{F}_n$ we will have $\emptyset$, $\Omega$, $A_1$, ... ,$A_n$ and the unions of all except one $A_i$ (there are n choose n-1 ways to select this union). Hence:
+\begin{align*}
+|\mathcal{F}_n|&=1+1+n+{n\choose n-1}\\
+&=2+n+n\\
+&=2(n+1)\\
+\end{align*} 
+\section*{Q2}
+Let $\Omega=\{a,b,c,d\}$, $\mathcal{F}=\{\emptyset,\Omega,\{a,b\},\{c,d\}\}$ and $\mathcal{G}=\{\emptyset,\Omega,\{a,c\},\{b,d\}\}$. We then have $\mathcal{H}=\mathcal{F}\cup\mathcal{G}=\{\emptyset,\Omega,\{a,b\},\{c,d\},\{a,c\},\{b,d\}\}$. But then we have $\{a,b\}\cup\{a,c\}=\{a,b,c\}$ which isn't in $\mathcal{H}$. As $\mathcal{H}$ isn't closed under union it isn't a $\sigma-$algebra. Hence the union of two $\sigma-$algebras is not in general also a $\sigma-$algebra.
+\section*{Q3}
+\subsection*{a)}
+First we require it to contain $\emptyset$, $\Omega$, $A$ and $B$. If the intersect of $A$ and $B$ is empty we can close it under complement and union by adding $\Omega\symbol{92}A$, $\Omega\symbol{92}B$, $A\cup B$ and $\Omega\symbol{92}(A\cup B)$. If the intersect isn't empty we must further add $(\Omega\symbol{92}A)\cup(B\cap A)$, $(\Omega\symbol{92}B)\cup(A\cap B)$, $A\symbol{92}B$ and $B\symbol{92}A$. So in general we get the smallest $\sigma-$algebra is:
+$$\mathcal{F}=\{\emptyset,\Omega,A,B,\Omega\symbol{92}A,\Omega\symbol{92}B,A\cup B,\Omega\symbol{92}(A\cup B),(\Omega\symbol{92}A)\cup(B\cap A),(\Omega\symbol{92}B)\cup(A\cap B)\}$$
+\subsection*{b)}
+Note that due to independence we have $B\cap A=\emptyset$.
+\begin{align*}
+\mathbb{P}(\emptyset)&=0\\
+\mathbb{P}(\Omega)&=1\\
+\mathbb{P}(A)&=0.4\\
+\mathbb{P}(B)&=0.5\\
+\mathbb{P}(A\cup B)&=\mathbb{P}(A)+\mathbb{P}(B)=0.5+0.4=0.9\\
+\mathbb{P}(\Omega\symbol{92}(A\cup B))&=\mathbb{P}(\Omega)-\mathbb{P}(A\cup B)=1-0.9=0.1\\
+\mathbb{P}(\Omega\symbol{92}A)&=\mathbb{P}(\Omega)-\mathbb{P}(A)=1-0.4=0.6\\
+\mathbb{P}(\Omega\symbol{92}B)&=\mathbb{P}(\Omega)-\mathbb{P}(B)=1-0.5=0.5\\
+\mathbb{P}((\Omega\symbol{92}A)\cup(B\cap A))&=\mathbb{P}(\Omega\symbol{92}A)=0.6\\
+\mathbb{P}((\Omega\symbol{92}B)\cup(A\cap B))&=\mathbb{P}(\Omega\symbol{92}B)=0.5\\
+\end{align*}
+\section*{Q4}
+Let $a,b\in\mathbb{R}$ such that $a<b$. As we have a borel $\sigma-$algebra everything is closed under compliment and countable union. We first know that we have intervals of the form $(-\infty,a]$, so taking the compliment we also have intervals of the form $(a,\infty)$. Now $((-\infty,a]\cup(b,\infty))^c=(a,b]$. We also have $(a,b)=\bigcup_{n=1}^{\infty}\left(a,b-\frac{1}{n}\right]$. Also $(-\infty,b)=(-\infty,a]\cup(a,b)$ and complimenting $(-\infty,b)$ we also get $[b,\infty)$. Now we get $((-\infty,a)\cup[b,\infty))^c=[a,b)$, which is the first interval we wanted to show was contained in the borel $\sigma-$algebra. Now we finally get $((-\infty,a)\cup(b,\infty))^c=[a,b]$, which is the other interval we wanted to show was contained in the borel $\sigma-$algebra.
+\section*{Q5}
+Using only the three Kolmogorov axioms of a probability measure we want to show that if $A$ and $B$ are events satisfying $A\subseteq B$ then $\mathbb{P}(A)\leq\mathbb{P}(B)$.
+\begin{proof}
+The third axiom states that a countable set of disjoint events $E_1,E_2,...$ satisfies $\mathbb{P}\left(\bigcup_{i=1}^{\infty}E_i\right)=\sum_{i=1}^{\infty}\mathbb{P}(E_i)$. Letting $E_1=A$, $E_2=B\symbol{92}A$ and $E_i=\emptyset$ where $i\geq3$ we get $E_1\cup E_2\cup E_3\cup ...=B$. Now applying the third axiom we get:
+$$\mathbb{P}(A)+\mathbb{P}(B\symbol{92}A)+\sum_{i=3}^{\infty}\mathbb{P}(\emptyset)=\mathbb{P}(B)$$
+By the first axiom we must have $\mathbb{P}(E_j)\geq0$ where $j\geq0$ and as the left hand side of the equation above is a series of non-negative numbers converging to $\mathbb{P}(B)$ we can see that $\mathbb{P}(A)\leq\mathbb{P}(B)$ with equality if and only if $B\symbol{92}A=\emptyset$, i.e. $B=A$.
+\end{proof}
+\section*{Q6}
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space, and $A_1, A_2, ...$ be an increasing sequence of events; that is, $A_1\subseteq A_2\subseteq···$ . Using only the Kolmogorov axioms, we want to prove that $\mathbb{P}$
+is continuous from below:
+$$\lim_{n\rightarrow\infty}\mathbb{P}(A_n)=\mathbb{P}\left(\bigcup_{i=1}^{\infty}A_i\right)$$
+\begin{proof}
+First we define $B_1=A_1$ and $B_n=A_n\symbol{92}\left(\bigcup_{i=1}^{n-1}A_i\right)$ where $n\geq2$. We can see that $B_1$ and each $B_n$ are disjoint and hence we can apply the third axiom:
+\begin{align*}
+\mathbb{P}\left(\bigcup_{n=1}^\infty B_n\right)&=\sum_{i=1}^{\infty}\mathbb{P}(B_i)\\
+&=\lim_{n\rightarrow\infty}\sum_{i=1}^{n}\mathbb{P}(B_i)\\
+&=\lim_{n\rightarrow\infty}\sum_{i=1}^{n}\mathbb{P}\left(A_i\symbol{92}\left(\bigcup_{j=1}^{n-1}A_j\right)\right)\\
+&=\lim_{n\rightarrow\infty}\mathbb{P}(A_n)\\
+\end{align*}
+We also have that $\mathbb{P}\left(\bigcup_{n=1}^\infty B_n\right)=\mathbb{P}\left(\bigcup_{i=1}^{\infty}A_i\right)$ as each $A_{n-1}$ is contained in $A_{n}$ we get that excluding each previous $A_i$ and then unioning each $B_i$ is the same as just unioning each $A_i$. Hence the result. 
+\end{proof}
+\section*{Q8}
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space and $(\mathbb{R},\mathcal{B}(\mathbb{R}))$ the measurable space of reals and its borel $\sigma-$algebra, we also have the function $\mu_{X}(B)=\mathbb{P}(X^{-1}(B))$ for all $B\in\mathcal{B}(\mathbb{R})$. We want to show that $(\mathbb{R},\mathcal{B}(\mathbb{R}),\mu_{X})$ is a probability space.
+\begin{proof}
+As we have a sample space ($\mathbb{R}$) and what we know to be a $\sigma-$algebra ($\mathcal{B}(\mathbb{R})$) we will just show that the properties of a probability measure hold for $\mu_{X}$. A random variable is a function $X:\Omega\rightarrow\mathbb{R}$ such that the preimage of any set $B\in\mathcal{B}(\mathbb{R})$ is measurable in $\mathcal{F}$. This means we have $X^{-1}(B)=\{\omega\in\Omega:X(\omega)\in B\}\in\mathcal{F}$. We also then have:
+\begin{align*}
+\mu_{X}(B)&=\mathbb{P}(X^{-1}(B))\\
+&=\mathbb{P}(\{\omega\in\Omega:X(\omega)\in B\})\\
+\end{align*}
+So we see that this is just the probability measure on $\mathcal{F}$ and hence it must also be a probability measure on $\mathcal{B}(\mathbb{R})$, i.e. we have:
+$$\mu_{X}(\mathbb{R})=\mathbb{P}(X^{-1}(\mathbb{R}))=\mathbb{P}(\Omega)=1$$
+and $\mu_{X}:\mathcal{B}(\mathbb{R})\rightarrow\mathcal{F}\rightarrow[0,1]$. As it maps to $\mathcal{F}$ we also get countable additivity and hence we see that it is indeed a probability measure and so $(\mathbb{R},\mathcal{B}(\mathbb{R}),\mu_{X})$ is a probability space.
+\end{proof}
+\end{document}
